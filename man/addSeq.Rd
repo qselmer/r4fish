@@ -4,7 +4,7 @@
 \alias{addSeq}
 \title{Title}
 \usage{
-addSeq(sec, add = 2)
+addSeq(sec, add = c(2, 0))
 }
 \arguments{
 \item{add}{}
