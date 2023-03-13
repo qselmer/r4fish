@@ -5,10 +5,9 @@ point_area <- function(x,
                        label, 
                        sp = "anchoveta",
                        plot = T, 
-                       catg = 1, dir,
+                       catg = 1, 
                        col = 1){
   require(sp)
-  load("data/AIP_borde.RData")
   permAIP <- AIP_borde
   indx <- point.in.polygon(point.x = x,point.y =  y, pol.x = permAIP$x, pol.y = permAIP$y, mode.checked=FALSE)
   if(any(indx == 0)){print("Hay puntos fuera del area")}
