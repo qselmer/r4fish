@@ -29,9 +29,8 @@ get_biometric <- function(dir =  "rawdata",
     created <- mapply(convert, xls, gsub("xlsx", "csv", xls))
     # unlink(xls) # delete xlsx files
     file <- as.vector(created)
+    pattern <- file_ext(file)
   }
-
-  pattern <- file_ext(file)
 
   if(pattern == "csv"){
 
