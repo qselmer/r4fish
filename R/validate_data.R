@@ -4,7 +4,11 @@ validate_data <- function(data = data,
                           output_dir = "outputs",
                           output_file = "Information.docx"){
 
-  rmarkdown :: render(input = InformationVesselSet,
+  templ <- system.file("templates",
+                       "InformationVesselSet.Rmd",
+                       package = "r4fish")
+
+  rmarkdown :: render(input = templ,
                       output_dir = output_dir,
                       output_file = output_file)
   return(invisible())
