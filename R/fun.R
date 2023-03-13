@@ -40,9 +40,9 @@ get.sp <- function(sp = "anc", stock = NA){
 #' @export
 #'
 #' @examples
-make.marks <- function(sp = "anc", stk = 1, phi = FALSE) {
+make.marks <- function(sp = "sp", stock = stock, phi = FALSE) {
 
-  sp <- get.sp(sp = sp, stk = stk)
+  sp <- get.sp(sp = sp, stock = stock)
   all.marks <- seq(from = sp$lmin, to = sp$lmax, by = sp$bin.l)
 
   if(isTRUE(phi)) {
