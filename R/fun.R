@@ -23,7 +23,7 @@ inverse <- function (f, lower = -100, upper = 100) {
 #' @export
 #'
 #' @examples
-get.sp <- function(sp = "anc", stock = NA){
+get.sp <- function(sp = NA, stock = NA){
 
   sp0 <- species
   sp0 <- sp0[sp0$tradename == sp & sp0$stock == stock, ]
@@ -40,7 +40,7 @@ get.sp <- function(sp = "anc", stock = NA){
 #' @export
 #'
 #' @examples
-make.marks <- function(sp = "sp", stock = stock, phi = FALSE) {
+make.marks <- function(sp = NA, stock = stock, phi = FALSE) {
 
   sp <- get.sp(sp = sp, stock = stock)
   all.marks <- seq(from = sp$lmin, to = sp$lmax, by = sp$bin.l)
