@@ -1,0 +1,215 @@
+---
+title: "Validación de datos"
+subtitle: "Crucero de Evaluación Hidroacústica de Recursos Pelágicos"
+author: "Área Funcional de Dinámica Poblacional y Evaluación de Recursos Pelágicos (AFDPERP)"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, include=FALSE}
+require(pander)
+require(sp)
+require(r4fish)
+
+Base <- data
+Base[, "sp"] <- gsub(",.*$", "", Base[, "sp"])
+Base[, "sp"] <- tolower(Base[, "sp"])
+Base$buque = trimws(Base$buque)
+Base$buque = sub("\\,.*", "", Base$buque)
+Base$lance = trimws(Base$lance)
+Base$lat = -1*abs(Base$lat)
+Base$lon = -1*abs(Base$lon)
+```
+
+------------------------------------------------------------------------
+
+Crucero de Evaluación Hidroacústica de Recursos Pelágicos:
+
+```{r, echo=FALSE, results="show", comment=NA}
+cat(Base$crucero[1], sep = "\n")
+```
+
+## Información de lances
+
+-   Número total de lances:
+
+```{r, ,echo=FALSE, results="show", comment=NA}
+# Numero lances en el crucero, según rango de latitud 
+ylim <- c(-24.00,-2.00)
+Base_f1 <- Base[Base$lat >= ylim[1] &  Base$lat <= ylim[2], ]
+VesselSet <- paste(Base_f1$buque, Base_f1$lance, sep = "-")
+L_VesseSet <- unique(VesselSet)
+cat(length(L_VesseSet))
+```
+
+-   Número lances con presencia de anchoveta (*Engraulis ringens*):
+
+```{r, ,echo=FALSE, results="show", comment=NA}
+# Numero lances con la presencia de anchoveta 
+SpTarget = sp
+Base_f2 = subset(x = Base, subset = Base$sp %in% SpTarget)
+VesselSetAnc <- paste(Base_f2$buque, Base_f2$lance, sep = "-")
+L_VesselSetAnc <- unique(VesselSetAnc)
+cat(length(L_VesselSetAnc))
+```
+
+-   Número lances con presencia y captura de anchoveta (*Engraulis ringens*):
+
+```{r, ,echo=FALSE, results="show", comment=NA}
+# Lances con anchoveta, con captura de anchoveta --------------------------------
+Base_f3 <- Base_f2[!is.na(Base_f2$peso.muestra_kg),]
+VesselSetAncCap <- VesselSetAnc[!is.na(Base_f2$peso.muestra_kg)]
+L_VesselSetAncCap <- unique(VesselSetAncCap)
+cat(length(L_VesselSetAncCap))
+```
+
+-   Lances con presencia pero sin captura de anchoveta (*Engraulis ringens*):
+
+```{r, ,echo=FALSE, results="show", comment=NA}
+# Lances con anchoveta, sin captura de anchoveta --------------------------------
+unBase_f3 <- Base_f2[which(is.na(Base_f2$peso.muestra_kg)),]
+unVesselSetAnc <- paste(unBase_f3$buque, unBase_f3$lance, sep = "-")
+L_unVesseSetAnc <- unique(unVesselSetAnc)
+if(length(L_unVesseSetAnc)== 0){cat(length(L_unVesseSetAnc))}else{
+for(l in L_unVesseSetAnc)cat(paste("\n ",l))}
+```
+
+## Verificación para cada lance con captura de anchoveta
+
+```{}
+```
+
+En el siguiente sección se:
+
+-   Verifica filas en blanco por lance
+-   Verifica valores de marcas dobles
+-   Ubica frecuencias sin tallas
+-   Ubica tallas sin frecuencias
+-   Verifica captura de anchoveta no registrada
+
+```{r, ,echo=FALSE, results="show", comment=NA}
+for(u in L_VesselSetAnc){
+  Base_lance = Base_f2[VesselSetAnc == u,]
+  Base_lance = Base_lance[,c("captura", "peso.muestra_kg", 
+                             "l", "frec")]
+  p1 = F; p2 = F; p3 = F; p4 = F;p5 = F
+  if(any(!complete.cases(Base_lance[,3:4]))){
+    p1 = T
+    cat(paste0("\n","| No se registra frecuencia, logitud o ambos"))
+  }
+  Base_lance = Base_lance[complete.cases(Base_lance[,3:4]),]
+  if(nrow(Base_lance) > 0){
+  if(any(is.na(Base_lance$captura))){
+    p2 = T
+    cat(paste0("\n","| No se registra captura total"))
+  }
+  if(any(is.na(Base_lance$peso.muestra_kg))){
+    p3 = T
+    cat(paste0("\n","| No se registra captura para anchoveta         (REE_NPESESP)"))
+  }
+  if(p2 == F & p3 == F){
+    if(length(unique(Base_lance$captura)) > 1){
+        p4 = T
+        cat(paste0("\n","| Más de dos valores diferentes por CAPTURA_ACTIVIDAD"))
+      }
+      if(length(unique(Base_lance$peso.muestra_kg)) > 1){
+        p4 = T
+        cat(paste0("\n","| Más de dos valores diferentes por REE_NPESESP"))
+      }
+      if(max(unique(Base_lance$captura)) <
+         max(unique(Base_lance$peso.muestra_kg))){
+        p4 = T
+        cat(paste0("\n","| Captura total menor que captura por especie"))
+      }
+  }
+
+  }
+  marks <- Base_lance$l
+  tmp <- as.data.frame.table(table(marks))
+  if(any(tmp$frec != 1)){
+    p5 = T
+    cat(paste0("\n","| Se registran marcas multiples"))
+    }
+  VS = NULL; if(any(p1,p2,p3,p4,p5)){VS = u}
+  if(!is.null(VS)){cat("\n Lance:", VS)}
+}
+```
+
+## Stock Norte-Centro: Lances de anchoveta con captura
+
+Número lances de anchoveta, con captura, en la zona NC:
+
+```{r, ,echo=FALSE, results="show", comment=NA}
+BaseNCanc <- Base_f3[Base_f3$lat > -16 , ]
+LanNCanc <- paste(BaseNCanc$buque, BaseNCanc$lance, sep = "-")
+L_LanNCanc <- unique(LanNCanc)  
+cat(length(L_LanNCanc))
+```
+
+Número lances de anchoveta \< 2 cm, con captura, en la zona NC:
+
+```{r, ,echo=FALSE, results="show", comment=NA}
+BaseNCanc <- BaseNCanc[BaseNCanc$l < 2, ]
+if(any(!is.na(BaseNCanc$l))){
+LanNCanc <- paste(BaseNCanc$buque, BaseNCanc$lance, sep = "-")
+L_LanNCanc <- unique(LanNCanc)
+}else{
+  L_LanNCanc <- NULL
+}
+cat(length(L_LanNCanc))
+for(l in L_LanNCanc)cat(paste("\n ",l))
+```
+
+## Stock Sur: Lances de anchoveta con captura
+
+Número lances de anchoveta, con captura, en la zona Sur:
+
+```{r, ,echo=FALSE, results="show", comment=NA}
+BaseSanc <- Base_f3[Base_f3$lat <= -16 , ]
+LanSanc <- paste(BaseSanc$buque, BaseSanc$lance, sep = "-")
+L_LanSanc <- unique(LanSanc)  
+cat(length(L_LanSanc))
+```
+
+Número lances de anchoveta \< 2 cm, con captura, en la zona Sur:
+
+```{r, ,echo=FALSE, results="show", comment=NA}
+BaseSanc <- BaseSanc[BaseSanc$l < 2,]
+LanSanc <- paste(BaseSanc$buque, BaseSanc$lance, sep = "-")
+L_LanSanc <- unique(LanSanc)  
+cat(length(L_LanSanc))
+for(l in L_LanSanc)cat(paste("\n ",l))
+```
+
+## Ubicación de lances
+
+```{r, ,echo=FALSE, results="show", comment=NA}
+par(mar = rep(0,4))
+dfPoint <- data.frame(LATITUD_INICIAL = Base_f3$lat,
+                      LONGITUD_INICIAL= Base_f3$lon, 
+                      LANCE = paste(Base_f3$buque,
+                                     Base_f3$lance, sep = "-"))
+
+pointMap <- point_area(x = dfPoint$lon,
+                       y = dfPoint$lat, 
+                       label = dfPoint$LANCE, 
+                       catg = 0,
+                       plot = T)
+
+dfPoint0 <- dfPoint[which(pointMap$point.in.area == 0),]
+
+if(length(as.character(unique(pointMap$points.lances))) == 0){
+  cat("AIPs asiganda a cada lance correctamente")
+  }else{
+    pointMap <- point_area(x=dfPoint0$lon, y = dfPoint0$lat,
+                           label = dfPoint0$LANCE,catg = 0, 
+                           plot = T, 
+                           col = 2)
+    cat("\n Lances sin asignación de AIPs")
+    cat(paste0("\n ", as.character(unique(pointMap$points.lances))))
+    }
+```
