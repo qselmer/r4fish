@@ -23,10 +23,10 @@ inverse <- function (f, lower = -100, upper = 100) {
 #' @export
 #'
 #' @examples
-get.sp <- function(sp = "anc", stk = 1){
+get.sp <- function(sp = "anc", stock = NA){
 
   sp0 <- species
-  sp0 <- sp0[sp0$abbreviate == sp & sp0$stock == stk, ]
+  sp0 <- sp0[sp0$tradename == sp & sp0$stock == stock, ]
   return(sp0)
 }
 
