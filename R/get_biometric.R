@@ -59,8 +59,6 @@ get_biometric <- function(dir =  "rawdata",
     base$lat <- -abs(base$lat)
   }
 
-  unlink(file)
-
   if(save == T){
     file.name <- paste0(name, ".", pattern)
     file.name <- file.path(path = dir, file.name)
