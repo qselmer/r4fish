@@ -10,6 +10,9 @@
 #' @examples
 #'
 distCoast = function(lon, lat){
+  require(rgdal)
+  require(sp)
+
   temp = data.frame(lon = lon, lat = lat)
   posiciones = temp[,c("lon", "lat")]
 

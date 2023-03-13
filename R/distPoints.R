@@ -1,4 +1,7 @@
 distPoints = function(lonA, latA, lonB, latB){
+  require(rgdal)
+  require(sp)
+
   temp1 = data.frame(lon = lonA, lat = latA)
   temp2 = data.frame(lon = lonB, lat = latB)
   posiciones1 = temp1[,c("lon", "lat")]
