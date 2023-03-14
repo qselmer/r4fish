@@ -45,7 +45,7 @@ get_ab <- function( file = "xxx.csv",
 
     hb = 60
     tmp <- data[!is.na(data$weight), ]
-    tmp <- tmp[tmp$weight != 0 | !is.nan(tmp$weight), ]
+    tmp <- tmp[tmp$weight > 0.001 | !is.nan(tmp$weight), ]
     tmp.t <- as.data.frame.table(table(tmp$length))
     tmp.t$Var1 <- as.numeric(as.character(tmp.t$Var1))
     tmp.t$Freq2 <- tmp.t$Freq/4
