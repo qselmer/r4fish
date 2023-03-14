@@ -30,7 +30,8 @@ get_ab <- function( file = "xxx.csv",
   }
 
   if(!all(is.na(data$weight))){
-  data.glm <- data[data$weight > 0.001 | !is.nan(data$weight), ]
+
+  data.glm <- data[data$weight > 1 | !is.nan(data$weight), ]
   model <- glm(log(weight) ~ log(length), data = data.glm, na.action = na.omit)
   pars <- summary(model)$coefficients[, 1:2]
   b <- pars["log(length)", ]
@@ -45,7 +46,7 @@ get_ab <- function( file = "xxx.csv",
 
     hb = 60
     tmp <- data[!is.na(data$weight), ]
-    tmp <- tmp[tmp$weight > 0.001 | !is.nan(tmp$weight), ]
+    tmp <- tmp[tmp$weight > 1 | !is.nan(tmp$weight), ]
     tmp.t <- as.data.frame.table(table(tmp$length))
     tmp.t$Var1 <- as.numeric(as.character(tmp.t$Var1))
     tmp.t$Freq2 <- tmp.t$Freq/4
