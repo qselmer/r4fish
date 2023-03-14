@@ -8,7 +8,9 @@
 #'
 #' @examples
 #'
-add_seq <- function(sec, add = c(2, 0)){
+add_seq <- function(sec,
+                    add = c(2, 0)){
+
   rz <- diff(sec)[1]
   if(length(add) == 1){add = rep(add, 2)}
   i1 <- rev(seq(range(sec)[1]-rz, by = -1*rz, length.out = add[1]))
