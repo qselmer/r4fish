@@ -30,7 +30,7 @@ get_ab <- function( file = "xxx.csv",
   }
 
   if(!all(is.na(data$weight))){
-  data.glm <- data[data$weight != 0 | !is.nan(data$weight), ]
+  data.glm <- data[data$weight > 0.001 | !is.nan(data$weight), ]
   model <- glm(log(weight) ~ log(length), data = data.glm, na.action = na.omit)
   pars <- summary(model)$coefficients[, 1:2]
   b <- pars["log(length)", ]
