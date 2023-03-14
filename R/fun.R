@@ -25,7 +25,7 @@ inverse <- function (f, lower = -100, upper = 100) {
 #' @examples
 get.sp <- function(sp = NA, stock = NA){
 
-  sp0 <- species
+  sp0 <- r4fish::species
   sp0 <- sp0[sp0$tradename == sp & sp0$stock == stock, ]
   return(sp0)
 }
