@@ -29,11 +29,16 @@ get_ab <- function( file = "xxx.csv",
     data <- data[data$sp == sp, ]
   }
 
+  if(!all(is.na(data$weight))){
   model <- glm(log(weight) ~ log(length), data = data, na.action = na.omit)
   pars <- summary(model)$coefficients[, 1:2]
   b <- pars["log(length)", ]
   a <- pars["(Intercept)", ]
   ab <- list(a = as.numeric(exp(a[1])), b = as.numeric(b[1]))
+  }else{
+    ab <- list(a = NA, b = NA)
+  }
+
 
   if(plot.ab == T){
 
