@@ -3,6 +3,7 @@ get_ab <- function( file = "xxx.csv",
                     dir = "inputs",
                     sp =   "anchoveta",
                     stock = "nc",
+                    fix_b = 3,
                     plot.ab = T){
 
   require(TBE)
@@ -33,11 +34,25 @@ get_ab <- function( file = "xxx.csv",
 
   data.glm <-  data[data$weight > 0, ]
   data.glm <-  data.glm[!is.nan(data$weight),]
-  model <- glm(log(weight) ~ log(length), data = data.glm, na.action = na.omit)
-  pars <- summary(model)$coefficients[, 1:2]
-  b <- pars["log(length)", ]
-  a <- pars["(Intercept)", ]
-  ab <- list(a = as.numeric(exp(a[1])), b = as.numeric(b[1]))
+
+  if(is.na(fix_b)){
+    model <- glm(log(weight) ~ log(length), data = data.glm, na.action = na.omit)
+    pars <- summary(model)$coefficients[, 1:2]
+    b <- pars["log(length)", ]
+    a <- pars["(Intercept)", ]
+    ab <- list(a = as.numeric(exp(a[1])), b = as.numeric(b[1]))
+  }else{
+
+    data.glm$length2 <-  (data.glm$length^fix_b)
+    model <- lm(weight ~ 0 + length2, data = data.glm, na.action = na.omit)
+    pars <- summary(model)$coefficients[, 1:2]
+    b <- fix_b
+    a <- pars["Estimate"]
+    ab <- list(a = as.numeric(a[1]), b = as.numeric(b[1]))
+
+    }
+
+
   }else{
     ab <- list(a = NA, b = NA)
   }
