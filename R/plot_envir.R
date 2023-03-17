@@ -4,7 +4,7 @@
 #
 # save(envir_scenario, file = "data/envir_scenario.RData")
 
-load("data/envir_scenario.Rdata")
+# load("data/envir_scenario.Rdata")
 
 #' Title
 #'
