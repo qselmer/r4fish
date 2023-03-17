@@ -1,10 +1,9 @@
-# envir_scenario <- read.csv("J:/.database/auxdata/envir_scenario.csv", encoding = "latin1")
-#
-# envir_scenario <- list(envir_scenario, "http://met.igp.gob.pe/elnino/lista_eventos.html")
-#
-# save(envir_scenario, file = "data/envir_scenario.RData")
-
-# load("data/envir_scenario.Rdata")
+# envirScenario <- read.csv("J:/.database/auxdata/envir_scenario.csv", encoding = "latin1")
+# #
+# # envir_scenario <- list(envir_scenario, "http://met.igp.gob.pe/elnino/lista_eventos.html")
+# #
+# save(envirScenario, file = "data/envirScenario.RData")
+# load(file = "data/envirScenario.Rdata")
 
 #' Title
 #'
@@ -26,7 +25,7 @@ plot_envir <- function(what = NA,
                        ){
 
   require(stringi)
-  envir <- envir_scenario[[1]]
+  envir <- envirScenario
   if(is.na(what)){
     envir <- envir
     colx <- c("red", "blue")
@@ -73,6 +72,7 @@ plot_envir <- function(what = NA,
 
   }
 
-  return("http://met.igp.gob.pe/elnino/lista_eventos.html")
+  link <- "http://met.igp.gob.pe/elnino/lista_eventos.html"
+  return(link)
 
 }

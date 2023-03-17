@@ -4,10 +4,10 @@
 \alias{get.sp}
 \title{Title}
 \usage{
-get.sp(sp = "anc", stk = 1)
+get.sp(sp = NA, stock = NA)
 }
 \arguments{
-\item{stk}{}
+\item{stock}{}
 }
 \description{
 Title
