@@ -4,6 +4,8 @@
 #
 # save(envir_scenario, file = "data/envir_scenario.RData")
 
+load("data/envir_scenario.Rdata")
+
 #' Title
 #'
 #' @param what
@@ -71,6 +73,6 @@ plot_envir <- function(what = NA,
 
   }
 
-  return(envir_scenario[[2]])
+  return("http://met.igp.gob.pe/elnino/lista_eventos.html")
 
 }
