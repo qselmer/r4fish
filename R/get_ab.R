@@ -3,7 +3,7 @@ get_ab <- function( file = "xxx.csv",
                     dir = "inputs",
                     sp =   "anchoveta",
                     stock = "nc",
-                    fix_b = 3,
+                    fix_b = NA,
                     plot.ab = T){
 
   require(TBE)
