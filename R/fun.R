@@ -69,3 +69,5 @@ range_lat <- function(sp = NA, stock = NA) {
   return(lat)
 }
 
+
+

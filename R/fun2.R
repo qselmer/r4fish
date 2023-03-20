@@ -13,7 +13,7 @@ amd <-  function(x){
 
 df2m <- function(df, row.n = 1) {
 
-  ifelse(row.n = 0){
+  if(row.n == 0){
     tmp <- df
   }else{
     rownames(df) <- df[,row.n]
