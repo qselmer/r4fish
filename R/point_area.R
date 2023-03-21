@@ -11,7 +11,7 @@ point_area <- function(x,
 
   permAIP <- AIP_borde
   indx <- point.in.polygon(point.x = x,point.y =  y, pol.x = permAIP$x, pol.y = permAIP$y, mode.checked=FALSE)
-  if(any(indx == 0)){print("Hay puntos fuera del area")}
+  # if(any(indx == 0)){print("Hay puntos fuera del area")}
   points0 <- label[indx == catg]
   if(any(indx == catg)){
     if(plot == T){

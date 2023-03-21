@@ -1,11 +1,11 @@
 
 #' Identifica errores y valida la base de datos
 #'
-#' @param data
-#' @param sp
-#' @param stock
-#' @param cout
-#' @param file
+#' @param data datos del crucero en formato MF
+#' @param sp especie objetivo de la evaluación
+#' @param stock stock objetivo de la evaluación
+#' @param cout vector de caracteres que contienen la ruta de salida
+#' @param file ector de caracteres que contienen el nombre del archivo
 #'
 #' @return
 #' @export
@@ -27,7 +27,8 @@ validateSp <- function(data = data,
   rmarkdown :: render(input = templ,
                       output_dir = cout,
                       output_file = file)
-  return("Done")
+  cat("Done")
+  return(invisible())
 }
 
 
