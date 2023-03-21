@@ -7,7 +7,7 @@ getwd()
 
 check()
 document()
-# build()
+build()
 install(reload = T, force = T)
 
 remotes::install_github("qselmer/r4fish")
