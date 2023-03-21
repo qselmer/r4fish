@@ -4,6 +4,13 @@ subtitle: "Crucero de Evaluación Hidroacústica de Recursos Pelágicos"
 author: "Área Funcional de Dinámica Poblacional y Evaluación de Recursos Pelágicos (AFDPERP)"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: html_document
+toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+ theme: united
+    highlight: tango
+  
 ---
 
 ```{r setup, include=FALSE}
@@ -67,6 +74,7 @@ for(t in seq_along(L_VesselSet)){
 ```
 
 -  Ubicación correcta de lances :
+
 ```{r, ,echo=FALSE, results="show", comment=NA}
 par(mar = rep(0,4))
 pointMap <- point_area(x = dfPoint$lon,
@@ -90,8 +98,9 @@ if(length(as.character(unique(pointMap$points.lances))) == 0){
 # Numero lances en el crucero, según rango de latitud 
 SpTarget <- r4fish:::.getSp(sp = sp, stock = stock)
 SpTarget <- toupper(rownames(SpTarget))
-cat(SpTarget)
 ```
+
+# `SpTarget`
 
 -   Número de lances con presencia "SpTarget":
 
@@ -233,19 +242,18 @@ L_VesselSet <- unique(VesselSet)
 dfPoint <- data.frame(lance = rep(NA, length(L_VesselSet)),
                       lon = rep(NA, length(L_VesselSet)),
                       lat = rep(NA, length(L_VesselSet)))
-
-for(t in seq_along(L_VesselSet)){
-  Base_Lance <- Base_f1[VesselSet == L_VesselSet[t], c("lon",
-                                                       "lat")]
-  dfPoint$lance[t] <- L_VesselSet[t]
-  dfPoint$lon[t] <- Base_Lance$lon[1]
-  dfPoint$lat[t] <- Base_Lance$lat[1]
-  
-  B_lon <- length(unique(Base_Lance$lon))
-  B_lan <- length(unique(Base_Lance$lan))
-  if(B_lon > 1 | B_lan > 1){
     cat("Lance con diferentes (lon,lat)")
-    cat(t)
+    for(t in seq_along(L_VesselSet)){
+      Base_Lance <- Base_f1[VesselSet == L_VesselSet[t], c("lon",
+                                                           "lat")]
+      dfPoint$lance[t] <- L_VesselSet[t]
+      dfPoint$lon[t] <- Base_Lance$lon[1]
+      dfPoint$lat[t] <- Base_Lance$lat[1]
+  
+      B_lon <- length(unique(Base_Lance$lon))
+      B_lan <- length(unique(Base_Lance$lan))
+      if(B_lon > 1 | B_lan > 1){
+        cat("\n Lance:", L_VesselSet[t])
   }
 }
 ```
