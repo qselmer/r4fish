@@ -19,6 +19,12 @@ validateSp <- function(data = data,
                        stock = NA,
                        cout = "outputs",
                        file = "validateSp.html"){
+  require(pander)
+  require(sp)
+  require(r4fish)
+
+# -------------------------------------------------------------------------
+
 
   templ <-system.file("rmarkdown", "templates",
                       "InformationVesselSet.Rmd",

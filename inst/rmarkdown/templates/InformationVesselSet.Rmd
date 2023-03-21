@@ -11,9 +11,6 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r, include=FALSE}
-require(pander)
-require(sp)
-require(r4fish)
 
 Base <- data
 Base[, "sp"] <- gsub(",.*$", "", Base[, "sp"])
