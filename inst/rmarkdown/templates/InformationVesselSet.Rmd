@@ -4,11 +4,11 @@ subtitle: "Crucero de Evaluación Hidroacústica de Recursos Pelágicos"
 author: "Área Funcional de Dinámica Poblacional y Evaluación de Recursos Pelágicos (AFDPERP)"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: html_document
-toc: true
+  toc: true
     toc_float:
       collapsed: false
       smooth_scroll: false
- theme: united
+  theme: united
     highlight: tango
   
 ---
