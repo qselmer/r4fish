@@ -13,7 +13,15 @@ validateSp(
 )
 }
 \arguments{
-\item{file}{}
+\item{data}{datos del crucero en formato MF}
+
+\item{sp}{especie objetivo de la evaluación}
+
+\item{stock}{stock objetivo de la evaluación}
+
+\item{cout}{vector de caracteres que contienen la ruta de salida}
+
+\item{file}{ector de caracteres que contienen el nombre del archivo}
 }
 \description{
 Identifica errores y valida la base de datos
