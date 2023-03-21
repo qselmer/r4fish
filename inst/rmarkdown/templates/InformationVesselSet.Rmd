@@ -104,10 +104,10 @@ SpTarget = sp
 
 if(is.na(stock)){
   rg.lat <- NA 
-  Base_f2 = subset(x = Base, subset = Base$sp %in% SpTarget)
+  Base_f2 = Base[Base$sp %in% SpTarget,]
 }else{
     rg.lat <- .getLati(sp = sp, stock = stock)
-    Base_f2 = Base_f2[Base$sp %in% SpTarget,]
+    Base_f2 = Base[Base$sp %in% SpTarget,]
     Base_f2 = Base_f2[Base_f2$lat > rg.lat[1] & Base_f2$lat <= rg.lat[2]]
     }
 
