@@ -64,6 +64,7 @@ renderBiometric <- function(cin =  "inputs",
     base$lon <- -abs(base$lon)
     base$lat <- -abs(base$lat)
   }
+
   unlink(file)
   print(name)
   if(save == T){
