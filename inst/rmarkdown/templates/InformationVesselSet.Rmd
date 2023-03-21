@@ -3,7 +3,7 @@ title: "Validación de datos"
 subtitle: "Crucero de Evaluación Hidroacústica de Recursos Pelágicos"
 author: "Área Funcional de Dinámica Poblacional y Evaluación de Recursos Pelágicos (AFDPERP)"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
-output: word_document
+output: html_document
 ---
 
 ```{r setup, include=FALSE}

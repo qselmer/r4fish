@@ -1,8 +1,24 @@
 
+#' Identifica errores y valida la base de datos
+#'
+#' @param data
+#' @param sp
+#' @param stock
+#' @param cout
+#' @param file
+#'
+#' @return
+#' @export
+#'
+#' @examples#'
+#' \code{validateSp(data = data, sp = "jurel", stock = NA, cout = "outputs",
+#' file = "document.docx")}
+#'
 validateSp <- function(data = data,
                        sp = "anchoveta",
+                       stock = NA,
                        cout = "outputs",
-                       file = "validateSp.docx"){
+                       file = "validateSp.html"){
 
   templ <-system.file("rmarkdown", "templates",
                       "InformationVesselSet.Rmd",
