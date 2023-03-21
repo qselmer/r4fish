@@ -1,23 +1,28 @@
-#' Title
+
+#' Crea, unifica archivo biometrico
 #'
-#' @param dir
-#' @param file
-#' @param save
+#' @param cin vector de caracteres que contienen la ruta de entrada
+#' @param cout vector de caracteres que contienen la ruta de salida
+#' @param file vector de caracteres que contienen el nombre del archivo
+#' @param save logico; ¿Se deben guardar el archivo?
 #'
 #' @return
 #' @export
 #'
 #' @examples
+#' \code{renderBiometric(cin =  "input",
+#' cout = NA,
+#' file = "Biometria por especies 03032023.xlsx",
+#' save = T)}
 #'
-get_biometric <- function(cin =  "rawdata",
-                          cout = NA,
-                          file = "Biometria por especies 03032023.xlsx",
-                          save = T){
+renderBiometric <- function(cin =  "inputs",
+                            cout = ".",
+                            file = "data.xlsx",
+                            save = T){
   require(rio)
   require(tools)
   require(TBE)
   # -------------------------------------------------------------------------
-
   file <- file.path(path = cin, file)
   if(is.na(cout)){cout = cin}
   if (is.null(file)) {
@@ -59,15 +64,14 @@ get_biometric <- function(cin =  "rawdata",
     base$lon <- -abs(base$lon)
     base$lat <- -abs(base$lat)
   }
-
   unlink(file)
-
+  print(name)
   if(save == T){
     file.name <- paste0(name, ".", pattern)
     file.name <- file.path(path = cout, file.name)
     write.csv(base, file = file.name, row.names = F)
   }
 
-  return(base)
 
+  return(base)
 }
