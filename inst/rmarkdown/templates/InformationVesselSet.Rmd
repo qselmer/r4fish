@@ -53,6 +53,7 @@ dfPoint <- data.frame(lance = rep(NA, length(L_VesselSet)),
                       lon = rep(NA, length(L_VesselSet)),
                       lat = rep(NA, length(L_VesselSet)))
 
+cat("Lance con diferentes (lon,lat)")
 for(t in seq_along(L_VesselSet)){
   Base_Lance <- Base_f1[VesselSet == L_VesselSet[t], c("lon",
                                                        "lat")]
@@ -63,8 +64,7 @@ for(t in seq_along(L_VesselSet)){
   B_lon <- length(unique(Base_Lance$lon))
   B_lan <- length(unique(Base_Lance$lan))
   if(B_lon > 1 | B_lan > 1){
-    cat("Lance con diferentes (lon,lat)")
-    cat(t)
+    cat("\n Lance:", L_VesselSet[t])
   }
 }
 ```
@@ -108,7 +108,7 @@ if(is.na(stock)){
 }else{
     rg.lat <- r4fish:::.getLati(sp = sp, stock = stock)
     Base_f2 = Base[Base$sp %in% SpTarget,]
-    Base_f2 = Base_f2[Base_f2$lat > rg.lat[1] & Base_f2$lat <= rg.lat[2]]
+    Base_f2 = Base_f2[Base_f2$lat > rg.lat[1] & Base_f2$lat <= rg.lat[2],]
     }
 
 VesselSetSp <- paste(Base_f2$buque, Base_f2$lance, sep = "-")
