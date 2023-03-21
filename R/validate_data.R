@@ -1,17 +1,17 @@
 
-validate_data <- function(data = data,
-                          sp = "anchoveta",
-                          output_dir = "outputs",
-                          output_file = "Information.docx"){
+validateSp <- function(data = data,
+                       sp = "anchoveta",
+                       cout = "outputs",
+                       file = "validateSp.docx"){
 
-  templ <-templ <- system.file("rmarkdown", "templates",
-                               "InformationVesselSet.Rmd",
-                               package = "r4fish")
+  templ <-system.file("rmarkdown", "templates",
+                      "InformationVesselSet.Rmd",
+                      package = "r4fish")
 
   rmarkdown :: render(input = templ,
-                      output_dir = output_dir,
-                      output_file = output_file)
-  return(invisible())
+                      output_dir = cout,
+                      output_file = file)
+  return("Done")
 }
 
 
