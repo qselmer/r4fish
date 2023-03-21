@@ -43,7 +43,7 @@ L_VesseSet <- unique(VesselSet)
 cat(length(L_VesseSet))
 ```
 
--   Lances com mas de una posición (lon,lat):
+-   Lances con mas de una posición (lon,lat):
 
 ```{r, ,echo=FALSE, results="show", comment=NA}
 VesselSet <- paste(Base_f1$buque, Base_f1$lance, sep = "-")
@@ -69,7 +69,7 @@ for(t in seq_along(L_VesselSet)){
 }
 ```
 
--   Ubicación de lances correctos :
+-  Ubicación correcta de lances :
 ```{r, ,echo=FALSE, results="show", comment=NA}
 par(mar = rep(0,4))
 pointMap <- point_area(x = dfPoint$lon,
@@ -91,7 +91,7 @@ if(length(as.character(unique(pointMap$points.lances))) == 0){
 
 ```{r, ,echo=FALSE, results="show", comment=NA}
 # Numero lances en el crucero, según rango de latitud 
-SpTarget <- .getSp(sp = sp, stock = stock)
+SpTarget <- r4fish:::.getSp(sp = sp, stock = stock)
 SpTarget <- toupper(rownames(SpTarget))
 cat(SpTarget)
 ```
@@ -106,7 +106,7 @@ if(is.na(stock)){
   rg.lat <- NA 
   Base_f2 = Base[Base$sp %in% SpTarget,]
 }else{
-    rg.lat <- .getLati(sp = sp, stock = stock)
+    rg.lat <- r4fish:::.getLati(sp = sp, stock = stock)
     Base_f2 = Base[Base$sp %in% SpTarget,]
     Base_f2 = Base_f2[Base_f2$lat > rg.lat[1] & Base_f2$lat <= rg.lat[2]]
     }
@@ -227,15 +227,38 @@ cat(length(L_LanSp))
 for(l in L_LanSp)cat(paste("\n ",l))
 ```
 
-## Ubicación de lances para "SpTarget" :
+-   Lances de "SpTarget" con mas de una posición (lon,lat):
 
 ```{r, ,echo=FALSE, results="show", comment=NA}
-par(mar = rep(0,4))
-LANCE = paste(Base_f3$buque, Base_f3$lance, sep = "-")
+VesselSet <- paste(Base_f3$buque, Base_f3$lance, sep = "-")
+L_VesselSet <- unique(VesselSet)
 
-pointMap <- point_area(x = Base_f3$lon,
-                       y = Base_f3$lat, 
-                       label = LANCE, 
+dfPoint <- data.frame(lance = rep(NA, length(L_VesselSet)),
+                      lon = rep(NA, length(L_VesselSet)),
+                      lat = rep(NA, length(L_VesselSet)))
+
+for(t in seq_along(L_VesselSet)){
+  Base_Lance <- Base_f1[VesselSet == L_VesselSet[t], c("lon",
+                                                       "lat")]
+  dfPoint$lance[t] <- L_VesselSet[t]
+  dfPoint$lon[t] <- Base_Lance$lon[1]
+  dfPoint$lat[t] <- Base_Lance$lat[1]
+  
+  B_lon <- length(unique(Base_Lance$lon))
+  B_lan <- length(unique(Base_Lance$lan))
+  if(B_lon > 1 | B_lan > 1){
+    cat("Lance con diferentes (lon,lat)")
+    cat(t)
+  }
+}
+```
+
+-   Ubicación correcta de lances de "SpTarget" :
+```{r, ,echo=FALSE, results="show", comment=NA}
+par(mar = rep(0,4))
+pointMap <- point_area(x = dfPoint$lon,
+                       y = dfPoint$lat, 
+                       label = dfPoint$lance, 
                        catg = 0,
                        plot = T, col = 2)
 
