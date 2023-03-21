@@ -51,14 +51,14 @@ L_VesselSet <- unique(VesselSet)
 
 dfPoint <- data.frame(lance = rep(NA, length(L_VesselSet)),
                       lon = rep(NA, length(L_VesselSet)),
-                      lan = rep(NA, length(L_VesselSet)))
+                      lat = rep(NA, length(L_VesselSet)))
 
 for(t in seq_along(L_VesselSet)){
   Base_Lance <- Base_f1[VesselSet == L_VesselSet[t], c("lon",
                                                        "lat")]
   dfPoint$lance[t] <- L_VesselSet[t]
   dfPoint$lon[t] <- Base_Lance$lon[1]
-  dfPoint$lan[t] <- Base_Lance$lan[1]
+  dfPoint$lat[t] <- Base_Lance$lat[1]
   
   B_lon <- length(unique(Base_Lance$lon))
   B_lan <- length(unique(Base_Lance$lan))
