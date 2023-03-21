@@ -9,15 +9,17 @@
 #'
 #' @examples
 #'
-get_biometric <- function(dir =  "rawdata",
+get_biometric <- function(cin =  "rawdata",
+                          cout = NA,
                           file = "Biometria por especies 03032023.xlsx",
                           save = T){
   require(rio)
   require(tools)
   require(TBE)
   # -------------------------------------------------------------------------
-  file <- file.path(path = dir, file)
 
+  file <- file.path(path = cin, file)
+  if(is.na(cout)){cout = cin}
   if (is.null(file)) {
     return(NULL)
   }
@@ -58,9 +60,11 @@ get_biometric <- function(dir =  "rawdata",
     base$lat <- -abs(base$lat)
   }
 
+  unlink(file)
+
   if(save == T){
     file.name <- paste0(name, ".", pattern)
-    file.name <- file.path(path = dir, file.name)
+    file.name <- file.path(path = cout, file.name)
     write.csv(base, file = file.name, row.names = F)
   }
 

@@ -1,17 +1,18 @@
 
-ac <- function(x){
+as.c <- function(x){
   x <- as.character(x)
   return(x)
 }
 
-amd <-  function(x){
+as.md <-  function(x){
   x <- as.matrix.data.frame(x)
   return(x)
 }
 
 # -------------------------------------------------------------------------
 
-df2m <- function(df, row.n = 1) {
+df2m <- function(df = NA,
+                 row.n = 0) {
 
   if(row.n == 0){
     tmp <- df
@@ -21,6 +22,15 @@ df2m <- function(df, row.n = 1) {
   }
   tmp <- amd(tmp)
   return(tmp)
+
+}
+
+# -------------------------------------------------------------------------
+inverse <- function (f,
+                     lower = -100,
+                     upper = 100) {
+
+  function (y) uniroot((function (x) f(x) - y), lower = lower, upper = upper)[1]
 
 }
 
