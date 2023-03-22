@@ -18,7 +18,7 @@ validateSp <- function(data = data,
                        sp = "anchoveta",
                        stock = NA,
                        cout = "outputs",
-                       file = "validateSp.pdf"){
+                       file = "validateSp.docx"){
   require(pander)
   require(sp)
   require(r4fish)
