@@ -80,7 +80,8 @@ for(r in seq_along(listVessel)){
   tmp <- tmp[,c("buque","lance","lon","lat",
                 "l","frec", "captura")]
   vectorLance <- c(tmp$buque[1], tmp$lance[1])
-  vectorCoor <- c(tmp$captura[1],tmp$lon[1],tmp$lat[1])
+  distC <-  distCoast(lon = tmp$lon[1], lat = tmp$lat[1])
+  vectorCoor <- c(tmp$captura[1],tmp$lon[1],tmp$lat[1], distC)
   tmp <- merge(tmp, marks, all = T)
   tmp$frec[is.na(tmp$frec)] <- 0
   vectorFreq <- t(tmp$frec)
@@ -93,7 +94,7 @@ vectorRes <- as.data.frame.array(vectorRes)
 vectorSet <- as.data.frame.array(vectorSet)
 tmp.out <- cbind(vectorSet, vectorRes)
 
-colnames(tmp.out) <- c("buque","lance", "captura", "lon", "lat", marks$l)
+colnames(tmp.out) <- c("buque","lance", "captura", "lon", "lat", "dc", marks$l)
 rownames(tmp.out) <- NULL
 tmp.out <- tmp.out[order(tmp.out$lat, decreasing = T),]
 
