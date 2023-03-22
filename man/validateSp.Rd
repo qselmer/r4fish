@@ -9,7 +9,7 @@ validateSp(
   sp = "anchoveta",
   stock = NA,
   cout = "outputs",
-  file = "validateSp.pdf"
+  file = "validateSp"
 )
 }
 \arguments{

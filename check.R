@@ -10,8 +10,6 @@ document()
 build()
 # install(reload = T, force = T)
 
-remotes::install_github("qselmer/r4fish")
+# remotes::install_github("qselmer/r4fish")
 
 
-require(r4fish)
-r4fish:::r
