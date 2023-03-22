@@ -207,7 +207,8 @@ L_min "SpTarget" :
 ```{r, ,echo=FALSE, results="show", comment=NA}
 SpTarget <- .getSp(sp = sp, stock = stock)
 Lmin <- SpTarget$lmin
-cat(Lmin)
+unit <- SpTarget$unit
+cat(paste(Lmin, unit))
 ```
 
 Número lances :
