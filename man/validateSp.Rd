@@ -27,7 +27,6 @@ validateSp(
 Identifica errores y valida la base de datos
 }
 \examples{
-#'
 \code{validateSp(data = data, sp = "jurel", stock = NA, cout = "outputs",
 file = "document.docx")}
 

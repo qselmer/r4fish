@@ -9,6 +9,16 @@ as.md <-  function(x){
   return(x)
 }
 
+
+last <- function(x){
+  y <- x[length(y)]
+  return(y)
+}
+
+first <- function(x){
+  y <- x[1]
+  return(y)
+}
 # -------------------------------------------------------------------------
 
 df2m <- function(df = NA,

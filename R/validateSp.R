@@ -10,7 +10,7 @@
 #' @return
 #' @export
 #'
-#' @examples#'
+#' @examples
 #' \code{validateSp(data = data, sp = "jurel", stock = NA, cout = "outputs",
 #' file = "document.docx")}
 #'
@@ -24,8 +24,14 @@ validateSp <- function(data = data,
   require(r4fish)
 
 # -------------------------------------------------------------------------
-  stk <- ifelse(is.na(stock), "", stock)
-  file <- paste0(paste(file, sp, stk, sep = "_"), ".docx")
+
+  name = trimws(data[1, "crucero"])
+  if(is.na(stock)){
+    file <- paste0(paste(name, file, sp, sep = "_"), ".docx")
+  }else{
+    file <- paste0(paste(name, file, sp, stock, sep = "_"), ".docx")
+  }
+
 
   templ <-system.file("rmarkdown", "templates",
                       "InformationVesselSet.Rmd",
