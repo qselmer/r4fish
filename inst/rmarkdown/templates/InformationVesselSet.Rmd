@@ -146,7 +146,7 @@ En el siguiente sección se:
 -   Verifica valores de marcas dobles
 -   Ubica frecuencias sin tallas
 -   Ubica tallas sin frecuencias
--   Verifica captura de anchoveta no registrada
+-   Verifica captura de "SpTarget" no registrada
 
 ```{r, ,echo=FALSE, results="show", comment=NA}
 for(u in L_VesselSetSp){
