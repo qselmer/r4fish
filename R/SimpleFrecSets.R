@@ -45,8 +45,16 @@ SimpleFrecSets <- function(data = tmp,
   require(ruisu)
 
 # -------------------------------------------------------------------------
+
 name = trimws(data[1, "crucero"])
-name = paste0(cout,"/",name, "_SimpleFrecSets")
+
+if(is.na(stock)){
+  file <- paste(name, "SimpleFrecSets",sp, sep = "_")
+  }else{
+    file <- paste(name, "SimpleFrecSets", sp, stock, sep = "_")
+    }
+
+name = file.path(cout, file)
 
 marks0 <- r4fish:::.getMarks(sp = sp, stock = stock)
 rmrk <- range(marks0)
