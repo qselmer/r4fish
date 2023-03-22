@@ -166,7 +166,7 @@ for(u in L_VesselSetSp){
   }
   if(any(is.na(Base_lance$peso.muestra_kg))){
     p3 = T
-    cat(paste0("\n","| No se registra captura para anchoveta   
+    cat(paste0("\n","| No se registra captura para SpTarget   
                (REE_NPESESP)"))
   }
   if(p2 == F & p3 == F){
