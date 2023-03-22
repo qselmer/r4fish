@@ -3,9 +3,9 @@ title: "Validación de datos"
 subtitle: "Crucero de Evaluación Hidroacústica de Recursos Pelágicos"
 author: "Área Funcional de Dinámica Poblacional y Evaluación de Recursos Pelágicos (AFDPERP)"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
-html_document:
-    theme: united
-    highlight: tango
+pdf_document:
+    toc: true
+    toc_depth: 2
 ---
 
 ```{r setup, include=FALSE}
@@ -60,8 +60,8 @@ for(t in seq_along(L_VesselSet)){
   dfPoint$lon[t] <- Base_Lance$lon[1]
   dfPoint$lat[t] <- Base_Lance$lat[1]
   
-  B_lon <- length(unique(Base_Lance$lon))
-  B_lan <- length(unique(Base_Lance$lan))
+  B_lon <- length(unique(round(Base_Lance$lon,1)))
+  B_lan <- length(unique(round(Base_Lance$lat,1)))
   if(B_lon > 1 | B_lan > 1){
     cat("\n Lance:", L_VesselSet[t])
   }
@@ -70,7 +70,7 @@ for(t in seq_along(L_VesselSet)){
 
 -  Ubicación correcta de lances :
 
-```{r, ,echo=FALSE, results="show", comment=NA}
+```{r, ,echo=FALSE, results="show", comment=NA, message=FALSE}
 par(mar = rep(0,4))
 pointMap <- point_area(x = dfPoint$lon,
                        y = dfPoint$lat, 
@@ -239,18 +239,18 @@ dfPoint <- data.frame(lance = rep(NA, length(L_VesselSet)),
                       lat = rep(NA, length(L_VesselSet)))
     cat("Lance con diferentes (lon,lat)")
     for(t in seq_along(L_VesselSet)){
-      Base_Lance <- Base_f1[VesselSet == L_VesselSet[t], c("lon",
+      Base_Lance <- Base_f3[VesselSet == L_VesselSet[t], c("lon",
                                                            "lat")]
       dfPoint$lance[t] <- L_VesselSet[t]
       dfPoint$lon[t] <- Base_Lance$lon[1]
       dfPoint$lat[t] <- Base_Lance$lat[1]
   
-      B_lon <- length(unique(Base_Lance$lon))
-      B_lan <- length(unique(Base_Lance$lan))
-      if(B_lon > 1 | B_lan > 1){
-        cat("\n Lance:", L_VesselSet[t])
-  }
-}
+        B_lon <- length(unique(round(Base_Lance$lon,1)))
+        B_lan <- length(unique(round(Base_Lance$lat,1)))
+        if(B_lon > 1 | B_lan > 1){
+          cat("\n Lance:", L_VesselSet[t])
+        }
+    }
 ```
 
 -   Ubicación correcta de lances de "SpTarget" :
