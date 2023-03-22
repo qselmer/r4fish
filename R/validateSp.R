@@ -18,13 +18,14 @@ validateSp <- function(data = data,
                        sp = "anchoveta",
                        stock = NA,
                        cout = "outputs",
-                       file = "validateSp.docx"){
+                       file = "validateSp"){
   require(pander)
   require(sp)
   require(r4fish)
 
 # -------------------------------------------------------------------------
-
+  stk <- ifelse(is.na(stock), "", stock)
+  file <- paste0(paste(file, sp, stk, sep = "_"), ".docx")
 
   templ <-system.file("rmarkdown", "templates",
                       "InformationVesselSet.Rmd",
