@@ -267,6 +267,7 @@ if(format == ".pdf"){
   pdf.options(reset = TRUE)
 }
 
-return(tmp.out)
 cat(nameFile)
+return(tmp.out)
+
 }
