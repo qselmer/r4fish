@@ -91,6 +91,7 @@ if(length(as.character(unique(pointMap$points.lances))) == 0){
 # Numero lances en el crucero, según rango de latitud 
 SpTarget <- r4fish:::.getSp(sp = sp, stock = stock)
 SpTarget <- toupper(rownames(SpTarget))
+cat(SpTarget)
 ```
 
 # `SpTarget`
