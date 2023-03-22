@@ -1,4 +1,5 @@
 .getSp <- function(sp = NA, stock = NA){
+
   sp0 <- r4fish::species
 
   if(is.na(stock)){
@@ -8,9 +9,6 @@
       }
   return(sp.x)
   }
-
-# -------------------------------------------------------------------------
-.getUnitL <- .getSp(sp = sp, stock = stock)
 
 # -------------------------------------------------------------------------
 .getMarks <- function(sp = NA,
