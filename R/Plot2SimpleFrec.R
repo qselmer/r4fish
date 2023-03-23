@@ -26,7 +26,7 @@ PlotSimpleFrec <- function(tmp2l,
                            save = T,
                            width = 2625,
                            height = 1750,
-                           colset = "navajowhite"){
+                           colset = "navajowhite", ...){
   require(lattice)
   # -------------------------------------------------------------------------
   name = trimws(tmp.out[1, "crucero"])
