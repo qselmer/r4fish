@@ -20,13 +20,13 @@ PlotSimpleFrec2 <- function(tmp2l,
                            sp = sp,
                            stock = stock,
                            col.sp = "red",
-                           cout = cout,
+                           colset = "navajowhite",
+                           cout = ".",
+                           save = T,
                            format = ".png",
                            ylim = c(0,0.5),
-                           save = T,
                            width = 2625,
-                           height = 1750,
-                           colset = "navajowhite"){
+                           height = 1750){
   require(lattice)
   # -------------------------------------------------------------------------
   name = trimws(tmp.out[1, "crucero"])
