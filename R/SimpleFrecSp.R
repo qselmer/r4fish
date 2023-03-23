@@ -10,10 +10,6 @@
 #' @export
 #'
 #' @examples
-#' #' \code{SimpleFrecSets(data = data, sp = "jurel", stock = NA,
-#' col.sp = "green", cout = "outputs", format = ".png", npar = c(5,8),
-#' show.warnings = T, col.warnings = "gray70", n.warnings = 20,
-#' ylim = c(0,0.70), width = 800, height = 900, save = T)
 #'
 SimpleFrecSp <- function(data = tmp,
                          sp = "anchoveta",

@@ -4,7 +4,13 @@
 \alias{renderBiometric}
 \title{Crea, unifica archivo biometrico}
 \usage{
-renderBiometric(cin = "inputs", cout = ".", file = "data.xlsx", save = T)
+renderBiometric(
+  cin = "inputs",
+  cout = ".",
+  file = "data.xlsx",
+  encoding = "latin",
+  save = T
+)
 }
 \arguments{
 \item{cin}{vector de caracteres que contienen la ruta de entrada}
