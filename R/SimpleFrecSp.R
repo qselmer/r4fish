@@ -23,9 +23,9 @@ SimpleFrecSp <- function(data = tmp,
 name = trimws(data[1, "crucero"])
 
 if(is.na(stock)){
-  file <- paste(name, "SimpleFrecSets",sp, sep = "_")
+  file <- paste("SimpleFrecSets", name, sp, sep = "_")
   }else{
-    file <- paste(name, "SimpleFrecSets", sp, stock, sep = "_")
+    file <- paste("SimpleFrecSets", name, sp, stock, sep = "_")
     }
 
 name = file.path(cout, file)
