@@ -60,7 +60,6 @@ renderBiometric <- function(cin =  "inputs",
       }
     }
 
-
     colnames(base) <- tolower(colnames(base))
 
     Encoding(base$sp) <- encoding
@@ -68,7 +67,7 @@ renderBiometric <- function(cin =  "inputs",
 
     name1 <- gsub("\\D", "", name)
     name1 <- paste0("Cr", name1)
-    base$crucero <- tolower(name1)
+    base$crucero <- name1
 
     base$sp <- tolower(base$sp)
     base$buque <- as.character(base$buque)
