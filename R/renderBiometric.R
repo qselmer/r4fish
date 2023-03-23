@@ -76,7 +76,7 @@ renderBiometric <- function(cin =  "inputs",
     base$lat <- -abs(base$lat)
   }
 
-  unlink(file)
+  # unlink(file)
   print(name)
   if(save == T){
     file.name <- paste0(name, ".", pattern)
