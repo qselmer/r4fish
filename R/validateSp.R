@@ -27,9 +27,9 @@ validateSp <- function(data = data,
 
   name = trimws(data[1, "crucero"])
   if(is.na(stock)){
-    file <- paste0(paste(name, file, sp, sep = "_"), ".docx")
+    file <- paste0(paste(file, name, sp, sep = "_"), ".docx")
   }else{
-    file <- paste0(paste(name, file, sp, stock, sep = "_"), ".docx")
+    file <- paste0(paste(file, name, sp, stock, sep = "_"), ".docx")
   }
 
 
