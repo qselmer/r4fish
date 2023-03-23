@@ -11,7 +11,7 @@ as.md <-  function(x){
 
 
 last <- function(x){
-  y <- x[length(y)]
+  y <- x[length(x)]
   return(y)
 }
 
