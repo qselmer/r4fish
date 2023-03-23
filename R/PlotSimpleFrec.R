@@ -205,7 +205,7 @@ PlotSimpleFrec <- function(data = tmp2l,
     pdf.options(reset = TRUE)
   }
 
-  cat(nameplot)
+  cat(paste0("\n", nameplot))
   return(invisible())
 
 }

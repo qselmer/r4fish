@@ -57,7 +57,7 @@ PlotSimpleFrec2 <- function(data,
     rel <- unlist(cleanZeros(rel, 1))
     df.out <- data.frame(vessel_set =  listSets[u], marks = marks0, freq = rel)
     tmp.out2 <- rbind(tmp.out2, df.out)
-    print(listSets[u])
+    # print(listSets[u])
   }
 
   tmpjuv <- tmp.out[, as.character(marks0)]
@@ -92,22 +92,26 @@ PlotSimpleFrec2 <- function(data,
                cex = 0.65, pos = 2)
   }
 
-  xyplot(freq~marks|vessel_set, data= tmp.out2, panel = mypanel,
-         ylab='Frecuencia (%)',xlab='Longitud total (cm)',
-         ylim = ylim,  as.table=TRUE,
-         xaxs = "i", yaxs = "i", las = 2,
-         par.settings = list(strip.background=list(col= colset),
+  tp.plot <- xyplot(freq~marks|vessel_set, data= tmp.out2,
+                    panel = mypanel,
+                    ylab='Frecuencia (%)',
+                    xlab='Longitud total (cm)',
+                    ylim = ylim,  as.table=TRUE,
+                    xaxs = "i", yaxs = "i", las = 2,
+                    par.settings = list(strip.background=list(col= colset),
                              axis.text = list(cex = 1),
                              par.xlab.text = list(cex = 1),
                              par.ylab.text = list(cex = 1),
                              par.main.text = list(cex = 1)),
-         strip = strip.custom(bg= colset,
+                    strip = strip.custom(bg= colset,
                               par.strip.text=list(col="black",
                                                   cex=.8,
                                                   font=3)),
-         scales=list(cex=0.8,
-                     tck=c(0.5,0.5), x=list(cex=0.8), y=list(cex=0.8)),
-  )
+                    scales=list(cex=0.8,
+                     tck=c(0.5,0.5), x=list(cex=0.8), y=list(cex=0.8))
+                    )
+
+  plot(tp.plot)
 
   if(save == T){
     if(format == ".png"){
