@@ -16,19 +16,20 @@
 #' @export
 #'
 #' @examples
-PlotSimpleFrec2 <- function(tmp2l,
-                           sp = sp,
-                           stock = stock,
-                           col.sp = "red",
-                           colset = "navajowhite",
-                           cout = ".",
-                           save = T,
-                           format = ".png",
-                           ylim = c(0,0.5),
-                           width = 2625,
-                           height = 1750){
+PlotSimpleFrec2 <- function(data,
+                            sp = sp,
+                            stock = stock,
+                            col.sp = "red",
+                            colset = "navajowhite",
+                            cout = ".",
+                            save = T,
+                            format = ".png",
+                            ylim = c(0,0.5),
+                            width = 2625,
+                            height = 1750){
   require(lattice)
   # -------------------------------------------------------------------------
+  tmp.out <- tmp2l
   name = trimws(tmp.out[1, "crucero"])
 
   if(is.na(stock)){
@@ -40,7 +41,7 @@ PlotSimpleFrec2 <- function(tmp2l,
   nameplot = paste0(file,format)
   nameplot <- file.path(cout, nameplot)
 
-  tmp.out <- tmp2l
+
   numSets <- nrow(tmp.out)
   buque2 <- ifelse(nchar(tmp.out$buque)>15, abbreviate(tmp.out$buque, 10), tmp.out$buque)
   listSets<- paste(buque2, trimws(tmp.out$lance), sep = "-")
