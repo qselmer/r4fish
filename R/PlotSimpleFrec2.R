@@ -16,7 +16,7 @@
 #' @export
 #'
 #' @examples
-Plot2SimpleFrec <- function(tmp2l,
+PlotSimpleFrec2 <- function(tmp2l,
                            sp = sp,
                            stock = stock,
                            col.sp = "red",
