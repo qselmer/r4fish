@@ -60,8 +60,16 @@ renderBiometric <- function(cin =  "inputs",
       }
     }
 
+
     colnames(base) <- tolower(colnames(base))
+
     Encoding(base$sp) <- encoding
+    base$sp <- iconv(x = base$sp, to="ASCII//TRANSLIT")
+
+    Encoding(base$crucero) <- encoding
+    base$crucero <- iconv(x = base$crucero, to="ASCII//TRANSLIT")
+
+    base$sp <- tolower(base$sp)
     base$buque <- as.character(base$buque)
     base$fecha <- as.character(base$fecha)
     base$lon <- -abs(base$lon)
