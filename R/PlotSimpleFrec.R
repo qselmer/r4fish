@@ -26,6 +26,12 @@ PlotSimpleFrec <- function(data = tmp2l,
 
   name = file.path(cout, file)
 
+  marks0 <- r4fish:::.getMarks(sp = sp, stock = stock)
+  rmrk <- range(marks0)
+  rbin <- r4fish:::.getSp(sp = sp, stock = stock)$bin.l
+  range_lat <- r4fish:::.getLati(sp = sp, stock = stock)
+  juv0 <- r4fish:::.getJuv(sp = sp, stock = stock)
+
   buque2 <- ifelse(nchar(tmp.out$buque)>15, abbreviate(tmp.out$buque, 10), tmp.out$buque)
   vesselSet = paste(buque2, trimws(tmp.out$lance), sep = "-")
   area = isopArea.assigner(dataPoints = tmp.out, colLon = "lon", colLat = "lat")
