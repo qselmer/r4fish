@@ -43,12 +43,12 @@ plot2CompSizeTime <- function(dat = dat_marks,
                               SavePlot = T,
                               dirout = "Outputs/"
                               ){
-  sp <- r4fish:::.getSp(sp = sp)
+  spT <- r4fish:::.getSp(sp = sp, stock = stock)
   marks <- r4fish:::.getMarks(sp = sp, stock = stock)
   mjuv <- r4fish:::.getJuv(sp = sp, stock = stock)
 
 
-  if(is.na(ab)){ ab <- list(a = sp$a, b = sp$b) }
+  if(is.na(ab)){ ab <- list(a = spT$a, b = spT$b) }
   peso <- ab$a*(marks^ab$b)
 
   mat <- dat[, -1]
@@ -104,7 +104,7 @@ plot2CompSizeTime <- function(dat = dat_marks,
   abline(v = mjuv, lty = 2, col = "red", lwd = 1.2)
 
   mtext("Año", side = 2, line = 3, cex = 1)
-  mtext(sp$lengthType, side = 1, line = 2.5, cex = 1)
+  mtext(spT$lengthType, side = 1, line = 2.5, cex = 1)
 
   corners = par("usr")
   op <- par(xpd = TRUE)
@@ -113,7 +113,7 @@ plot2CompSizeTime <- function(dat = dat_marks,
 
   if(SavePlot == T){
     lb1 <- ifelse(type == "N", "Abundancia", "Biomasa")
-    fileName = paste(lb1, sp$acustica, src,
+    fileName = paste(lb1, spT$acustica, src,
                      round(floor(time)[1], 0), round(floor(time)[length(time)], 0),
                      sep =  "-")
     dev.copy(png,
