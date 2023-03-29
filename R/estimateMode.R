@@ -11,7 +11,11 @@
 #'
 #' @examples
 #'
-estimateMode = function(len, freq, tol.n = 150, nmodes = 2, tol.freq = 10){
+estimateMode <- function(len,
+                         freq,
+                         tol.n = 150,
+                         nmodes = 2,
+                         tol.freq = 10){
 
   if(sum(freq, na.rm = TRUE) < tol.n){
     out = NA

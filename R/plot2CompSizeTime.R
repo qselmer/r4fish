@@ -24,7 +24,7 @@
 #' @examples
 plot2CompSizeTime <- function(dat = dat_marks,
                               sp = "anchoveta",
-                              src = "fsh",
+                              stock = "nc",
                               type = "B",
                               ab = NA,
                               factor = NA,
@@ -43,11 +43,10 @@ plot2CompSizeTime <- function(dat = dat_marks,
                               SavePlot = T,
                               dirout = "Outputs/"
                               ){
-  sp <- getSpeciesInfo(sp = sp)
-  if(src == "fsh"){marks <- seq(sp$Lmin.fsh,sp$Lmax.fsh, sp$bin.L)}
-  if(src == "pope"){marks <- seq(sp$Lmin.pope, sp$Lmax.pope, sp$bin.L)}
+  sp <- r4fish:::.getSp(sp = sp)
+  marks <- r4fish:::.getMarks(sp = sp, stock = stock)
+  mjuv <- r4fish:::.getJuv(sp = sp, stock = stock)
 
-  mjuv <- sp$juvenile
 
   if(is.na(ab)){ ab <- list(a = sp$a, b = sp$b) }
   peso <- ab$a*(marks^ab$b)
