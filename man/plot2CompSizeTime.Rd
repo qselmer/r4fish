@@ -7,7 +7,7 @@
 plot2CompSizeTime(
   dat = dat_marks,
   sp = "anchoveta",
-  src = "fsh",
+  stock = "nc",
   type = "B",
   ab = NA,
   factor = NA,
