@@ -12,3 +12,5 @@ build()
 
 # remotes::install_github("qselmer/r4fish")
 
+load("data/species2.RData")
+fix(species2)
