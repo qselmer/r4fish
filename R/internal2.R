@@ -56,7 +56,7 @@ normalize = function(vect, na.rm = T){
 }
 
 #
-add_seq <- function(vec, add = c(2, 0)){
+add.seq <- function(vec, add = c(2, 0)){
 
   rz <- diff(vec)
   if(len.uni(rz) > 1){
@@ -69,4 +69,63 @@ add_seq <- function(vec, add = c(2, 0)){
   i2 <- seq(range(vec)[2]+rz, by =  1*rz, length.out = add[2])
   vec2 <- c(i1, vec,i2)
   return(vec2)
+}
+
+#
+roundUp = function(x, to = 2){
+  to*(x%/%to + as.logical(x%%to))
+}
+
+#
+VectorInVector = function(pattern, tag)
+  {
+  lenTag = length(pattern) - 1
+  result = NULL
+  for(i in seq(length(tag) - lenTag))
+  {
+    if(isTRUE(identical(tag[seq(i, i + lenTag)], pattern)))
+      result = c(result, i)
+  }
+  return(result)
+}
+
+#
+cleanZeros = function(vect, nzeros = 1){
+  data = matrix(vect)
+  data[data == 0] = NA
+
+  if((sum(is.na(data)) == length(data)) | (sum(!is.na(data)) == length(data)))
+    return(data)
+
+  if(nzeros > 0)
+  {
+    iniIndex = apply(matrix(apply(data, 1, is.na)), 2, VectorInVector, pattern = c(TRUE, FALSE))
+    finIndex = apply(matrix(apply(data, 1, is.na)), 2, VectorInVector, pattern = c(FALSE, TRUE))
+
+    index.fill = which(!is.na(data))
+    index = NULL
+    for(k in seq_len(length(iniIndex)))
+      index = c(index, seq(iniIndex[k] - nzeros + 1, iniIndex[k]))
+    for(k in seq_len(length(finIndex)))
+      index = c(index, seq(finIndex[k] + 1, finIndex[k] + nzeros))
+    index = index[!index %in% index.fill]
+
+    data[index] = 0
+  }
+  return(data)
+}
+
+#
+date2year <- function (date){
+  if (any(!inherits(date, c("POSIXt", "POSIXct", "POSIXlt",
+                            "Date")))) {
+    stop("date(s) not in POSIXt or Date format")
+  }
+  Y <- as.numeric(format(date, format = "%Y"))
+  start <- as.POSIXct(paste0(Y, "/01/01"), tz = "UTC")
+  end <- as.POSIXct(paste0(Y + 1, "/01/01"), tz = "UTC")
+  sofar <- as.numeric(difftime(date, start, units = "secs"))
+  total <- as.numeric(difftime(end, start, units = "secs"))
+  res <- Y + sofar/total
+  return(res)
 }
