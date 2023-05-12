@@ -11,7 +11,7 @@
 #' @export
 #'
 #' @examples
-curve_sel <- function(sp = NA,
+curve.sel <- function(sp = NA,
                       stock = NA,
                       par = c(NA, NA),
                       method = "log3",
