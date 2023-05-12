@@ -68,7 +68,10 @@ curve_sel <- function(sp = NA,
     p <- p +
       scale_x_continuous(expand = c(0, 0),
                          limits = range(marks)) +
-      scale_y_continuous(expand = c(0, 0) )
+      scale_y_continuous(expand = c(0, 0),
+                         sec.axis = sec_axis(~ (. - a)/b, name = "Inverse probability")
+                         )
+
 
 
     p <- p +
@@ -84,7 +87,7 @@ curve_sel <- function(sp = NA,
     p <- p +
       labs(
         x = "Total length (cm)",
-        y = "proportion",
+        y = "Probability of catch",
         colour = "Selectivity",
         title =  toupper (rownames(sp))
       )
