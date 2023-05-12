@@ -4,6 +4,12 @@ as.c <- function(x){
   return(x)
 }
 
+as.nc <-function(x){
+  x <- as.numeric(as.character(x))
+  return(x)
+}
+
+
 #
 last <- function(x){
   y <- x[length(x)]
