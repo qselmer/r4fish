@@ -35,14 +35,14 @@ curve_sel <- function(sp = NA,
     inv = inverse(function (x) 1/(1+ exp((par1*log(3)/par2)-(x*log(3)/par2))),
                   0.1, 100)
     par3 <- round(c(par1, par2), 2)
-    eq = expression(italic(S[li] == frac(1,1+e^((-log(3)*frac("l"-par3[1], par3[2]))))))
+    eq = bquote(italic(S[li] == frac(1,1+e^((-log(3)*(frac("l"-par3[1], par3[2])))))))
       }
   if(method == "log19"){
     sel = 1/(1+ exp(-log(19)*(marks-par1)/par2))
     inv = inverse(function (x) 1/(1+ exp(-log(19)*(x-par1)/par2)),
                   0.1, 100)
     par3 <- round(c(par1, par2), 2)
-    eq = expression(italic(S[li] == frac(1,1+e^((-log(19)*frac("l"-par3[1], par3[2]))))))
+    eq = bquote(italic(S[li] == frac(1,1+e^((-log(19)*(frac("l"-par3[1], par3[2])))))))
     }
 
   if(add.plot == TRUE){
@@ -99,9 +99,12 @@ curve_sel <- function(sp = NA,
         title =  toupper (rownames(sp))
       )
 
+    suppressWarnings(
     p <- p + annotate("text", x = 16, y = 0.25,
-                      label = eq)
+                      label = eq, parse = T, size = 4))
+
     print(p)
+
   }
 
   out <- list(parSel = c(par1, par2), sel = sel)
