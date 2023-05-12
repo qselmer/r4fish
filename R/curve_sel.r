@@ -20,8 +20,8 @@ curve_sel <- function(sp = NA,
 
   require(ggplot2)
   #---
-  marks <- make.marks(sp = sp, stock = stock)
-  sp <- get.sp(sp = sp, stock = stock)
+  marks <- r4fish:::.getMarks(sp = sp, stock = stock)
+  sp <- r4fish:::.getSp(sp = sp, stock = stock)
 
   if(all(is.na(par))){
     if(method == "log3"){par = c(sp$log3.par1, sp$log3.par2)}
