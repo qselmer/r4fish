@@ -67,9 +67,11 @@ curve_sel <- function(sp = NA,
 
     p <- p +
       scale_x_continuous(expand = c(0, 0),
+                         breaks = marks,
                          limits = range(marks)) +
       scale_y_continuous(expand = c(0, 0),
-                         sec.axis = sec_axis(~ (. - a)/b, name = "Inverse probability")
+                         sec.axis = sec_axis(~ (. - a)/b/1e4,
+                                             name = "Inverse probability")
                          )
 
 
