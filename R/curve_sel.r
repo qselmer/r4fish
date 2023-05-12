@@ -36,16 +36,18 @@ curve.sel <- function(sp = NA,
                   0.1, 100)
     par1q <- round(par1, 2)
     par2q <- round(par2, 2)
-    eq = expression(italic(S[li] == frac(1,1+e^((-log(3)*{frac("l"-par1q, par2q)})))))
-      }
+    eq = substitute(S[Li] == frac(1,1+e^(-log(3)*frac(L-par1q, par2q))),
+                    list(par1q = par1q, par2q = par2q))
+  }
   if(method == "log19"){
     sel = 1/(1+ exp(-log(19)*(marks-par1)/par2))
     inv = inverse(function (x) 1/(1+ exp(-log(19)*(x-par1)/par2)),
                   0.1, 100)
     par1q <- round(par1, 2)
     par2q <- round(par2, 2)
-    eq = bquotexpressione(italic(S[li] == frac(1,1+e^((-log(19)*{frac("l"-par1q, par2q)})))))
-    }
+    eq = substitute(S[Li] == frac(1,1+e^(-log(19)*frac(L-par1q, par2q))),
+                    list(par1q = par1q, par2q = par2q))
+  }
 
   if(add.plot == TRUE){
 
@@ -79,7 +81,7 @@ curve.sel <- function(sp = NA,
       scale_y_continuous(expand = c(0, 0),
                          sec.axis = sec_axis(~ (. - a)/b/1e4,
                                              name = "Inverse probability")
-                         )
+      )
 
 
 
@@ -101,16 +103,16 @@ curve.sel <- function(sp = NA,
         title =  toupper (rownames(sp))
       )
 
-    suppressWarnings(
-    p <- p + annotate("text", x = 16, y = 0.25,
-                      label = eq, parse = T, size = 4))
 
-    print(p)
+    p <- p + annotate("text", x = 16, y = 0.25,
+                      label = bquote(.(eq)), size = 5)
+    suppressWarnings(
+      print(p)
+    )
 
   }
 
   out <- list(parSel = c(par1, par2), sel = sel)
   return(out)
 }
-
 
