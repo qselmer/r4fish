@@ -4,11 +4,11 @@ as.c <- function(x){
   return(x)
 }
 
+#
 as.nc <-function(x){
   x <- as.numeric(as.character(x))
   return(x)
 }
-
 
 #
 last <- function(x){
@@ -55,11 +55,17 @@ inverse <- function (f, lower = -100, upper = 100) {
 
 }
 
+
+# -------------------------------------------------------------------------
+
 #
 normalize = function(vect, na.rm = T){
   out = vect/sum(vect, na.rm = na.rm)
   return(out)
 }
+
+
+# -------------------------------------------------------------------------
 
 #
 add.seq <- function(vec, add = c(2, 0)){
@@ -82,7 +88,10 @@ roundUp = function(x, to = 2){
   to*(x%/%to + as.logical(x%%to))
 }
 
-#
+
+# -------------------------------------------------------------------------
+
+
 VectorInVector = function(pattern, tag)
   {
   lenTag = length(pattern) - 1
@@ -121,7 +130,9 @@ cleanZeros = function(vect, nzeros = 1){
   return(data)
 }
 
-#
+
+# -------------------------------------------------------------------------
+
 date2year <- function (date){
   if (any(!inherits(date, c("POSIXt", "POSIXct", "POSIXlt",
                             "Date")))) {
@@ -135,3 +146,7 @@ date2year <- function (date){
   res <- Y + sofar/total
   return(res)
 }
+
+# -------------------------------------------------------------------------
+
+
