@@ -34,15 +34,17 @@ curve_sel <- function(sp = NA,
     sel = 1/(1+ exp((par1*log(3)/par2)-(marks*log(3)/par2)))
     inv = inverse(function (x) 1/(1+ exp((par1*log(3)/par2)-(x*log(3)/par2))),
                   0.1, 100)
-    par3 <- round(c(par1, par2), 2)
-    eq = bquote(italic(S[li] == frac(1,1+e^((-log(3)*(frac("l"-par3[1], par3[2])))))))
+    par1q <- round(par1, 2)
+    par2q <- round(par2, 2)
+    eq = expression(italic(S[li] == frac(1,1+e^((-log(3)*{frac("l"-par1q, par2q)})))))
       }
   if(method == "log19"){
     sel = 1/(1+ exp(-log(19)*(marks-par1)/par2))
     inv = inverse(function (x) 1/(1+ exp(-log(19)*(x-par1)/par2)),
                   0.1, 100)
-    par3 <- round(c(par1, par2), 2)
-    eq = bquote(italic(S[li] == frac(1,1+e^((-log(19)*(frac("l"-par3[1], par3[2])))))))
+    par1q <- round(par1, 2)
+    par2q <- round(par2, 2)
+    eq = bquotexpressione(italic(S[li] == frac(1,1+e^((-log(19)*{frac("l"-par1q, par2q)})))))
     }
 
   if(add.plot == TRUE){
