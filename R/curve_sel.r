@@ -33,12 +33,17 @@ curve_sel <- function(sp = NA,
   if(method == "log3"){
     sel = 1/(1+ exp((par1*log(3)/par2)-(marks*log(3)/par2)))
     inv = inverse(function (x) 1/(1+ exp((par1*log(3)/par2)-(x*log(3)/par2))),
-                  0.1, 100)}
+                  0.1, 100)
+    par3 <- round(c(par1, par2), 2)
+    eq = expression(italic(S[li] == frac(1,1+e^((-log(3)*frac("l"-par3[1], par3[2]))))))
+      }
   if(method == "log19"){
     sel = 1/(1+ exp(-log(19)*(marks-par1)/par2))
     inv = inverse(function (x) 1/(1+ exp(-log(19)*(x-par1)/par2)),
                   0.1, 100)
-  }
+    par3 <- round(c(par1, par2), 2)
+    eq = expression(italic(S[li] == frac(1,1+e^((-log(19)*frac("l"-par3[1], par3[2]))))))
+    }
 
   if(add.plot == TRUE){
 
@@ -67,7 +72,7 @@ curve_sel <- function(sp = NA,
 
     p <- p +
       scale_x_continuous(expand = c(0, 0),
-                         breaks = marks,
+                         breaks = range(marks)[1]: range(marks)[2],
                          limits = range(marks)) +
       scale_y_continuous(expand = c(0, 0),
                          sec.axis = sec_axis(~ (. - a)/b/1e4,
@@ -93,12 +98,14 @@ curve_sel <- function(sp = NA,
         colour = "Selectivity",
         title =  toupper (rownames(sp))
       )
+
+    p <- p + annotate("text", x = 16, y = 0.25,
+                      label = eq)
     print(p)
   }
 
-  return(sel)
-
-
+  out <- list(parSel = c(par1, par2), sel = sel)
+  return(out)
 }
 
 
