@@ -23,8 +23,10 @@ first <- function(x){
 }
 
 #
-as.m2df <-  function(x){
-  x <- as.matrix.data.frame(x)
+as.m2df <-  function(x, header = T){
+  namesx <- colnames(x)
+  x <- as.data.frame.matrix(x)
+  names(x) <- namesx
   return(x)
 }
 
@@ -36,7 +38,7 @@ as.df2m <- function(df = NA, row.n = 0){
       rownames(df) <- df[,row.n]
       tmp <- df[, -row.n]
     }
-  tmp <- as.data.frame.matrix(tmp)
+  tmp <- as.matrix.data.frame(tmp)
   return(tmp)
 }
 
@@ -148,5 +150,6 @@ date2year <- function (date){
 }
 
 # -------------------------------------------------------------------------
+
 
 
