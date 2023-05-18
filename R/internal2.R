@@ -48,6 +48,17 @@ len.uni <- function(vec){
   return(xx)
 }
 
+#
+newline <- function(x, split = " "){
+  # x <-  "zzzz aaaa ooo"
+  x <- unlist(strsplit(x,split))
+  charx <- x[1]
+  for(u in 2:length(x)){
+    charx <- paste(charx, "\n", x[u], sep="")
+  }
+  return(charx)
+}
+
 # -------------------------------------------------------------------------
 
 #
