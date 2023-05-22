@@ -1,6 +1,6 @@
 .getSp <- function(sp = NA, stock = NA){
 
-  sp0 <- r4fish::species
+  sp0 <- r4fish::species2
 
   if(is.na(stock)){
     sp.x <- sp0[sp0$tradename == sp,]
