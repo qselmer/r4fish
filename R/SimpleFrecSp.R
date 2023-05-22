@@ -75,8 +75,8 @@ tmp.out <- tmp.out[order(tmp.out$lat, decreasing = T),]
 if(save == T){
   nameFile <- paste0(name, ".csv")
   write.csv(x = tmp.out, file = nameFile, row.names = F)
+  cat(nameFile)
 }
 
-cat(nameFile)
 return(tmp.out)
 }
