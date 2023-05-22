@@ -9,9 +9,9 @@
 #'
 #' @examples
 #'
-getSpeciesInfo  <- function(sp,
-                            data = NULL,
-                            ...)
+getStockInfo  <- function(sp,
+                          data = NULL,
+                          ...)
   {
   if (sp %in% rownames(species)) {
     output <- as.list(species[sp, ])
