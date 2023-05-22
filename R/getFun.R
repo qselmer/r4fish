@@ -30,7 +30,7 @@
 .getLati <- function(sp = NA,
                     stock = NA) {
   sp <- .getSp(sp = sp, stock = stock)
-  lat <- unlist(sp[, c("lat.min", "lat.max")])
+  lat <- unlist(sp[, c("latMin", "latMax")])
   return(lat)
 }
 
@@ -47,7 +47,7 @@
 .getLP <- function(sp = NA,
                   stock = NA) {
   sp <- .getSp(sp = sp, stock = stock)
-  ab <- unlist(sp[, c("a", "b")])
+  ab <- unlist(sp[, c("LWa", "LWb")])
   ab <- list(a = ab[1], b = ab[2])
   return(ab)
 }
