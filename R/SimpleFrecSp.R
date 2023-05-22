@@ -44,6 +44,8 @@ data[, "lance"] <- trimws(data[, "lance"])
 data <- data[range_lat[1] < data$lat & range_lat[2] >= data$lat,]
 data <- data[data$sp == sp, ]
 data <- data[!is.na(data$frec), ]
+data <- data[!is.na(data$lat), ]
+data <- data[!is.na(data$lon), ]
 
 data$vessel_set = paste(data$buque, data$lance, sep = "-")
 listVessel <- unique(data$vessel_set)
