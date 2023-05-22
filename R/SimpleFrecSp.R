@@ -32,7 +32,7 @@ name = file.path(cout, file)
 
 marks0 <- r4fish:::.getMarks(sp = sp, stock = stock)
 rmrk <- range(marks0)
-rbin <- r4fish:::.getSp(sp = sp, stock = stock)$bin.l
+rbin <- r4fish:::.getSp(sp = sp, stock = stock)$lengthBin
 range_lat <- r4fish:::.getLati(sp = sp, stock = stock)
 juv0 <- r4fish:::.getJuv(sp = sp, stock = stock)
 marks <- data.frame(l = marks0)
