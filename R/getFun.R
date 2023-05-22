@@ -15,11 +15,12 @@
                      stock = NA,
                      phi = FALSE){
   sp <- .getSp(sp = sp, stock = stock)
-  all.marks <- seq(from = sp$lmin, to = sp$lmax, by = sp$bin.l)
+  all.marks <- seq(from = sp$lengthMin, to = sp$lengthMax,
+                   by = sp$lengthBin)
 
   if(isTRUE(phi)) {
-    marks_inf <- all.marks - 0.5*sp$bin.l
-    marks_sup <- all.marks + 0.5*sp$bin.l
+    marks_inf <- all.marks - 0.5*sp$lengthBin
+    marks_sup <- all.marks + 0.5*sp$lengthBin
     all.marks <- sort(unique(c(marks_inf, marks_sup)))
   }
   return(all.marks)
