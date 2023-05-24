@@ -49,7 +49,7 @@ len.uni <- function(vec){
 }
 
 # -------------------------------------------------------------------------
-plot.invi <- function(text = "", mtext = "", cex = 1, box = T,){
+plot.invi <- function(text = "", mtext = "", cex = 1, box = T, ...){
   plot(1,1, type = "n", axes = F, xlab = "", ylab = "")
   mtext(3, text = mtext, line = 0, adj = 0.01, cex = cex)
   text(1,1,text, cex = cex)
