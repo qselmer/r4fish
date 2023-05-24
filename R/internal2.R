@@ -49,10 +49,10 @@ len.uni <- function(vec){
 }
 
 # -------------------------------------------------------------------------
-plot.invi <- function(text = "", mtext = "", cex = 1, box = T, line = T){
+plot.invi <- function(text = "", mtext = "", col = 2,  cex = 1, box = T, line = T){
   plot(1,1, type = "n", axes = F, xlab = "", ylab = "")
   mtext(3, text = mtext, line = 0, adj = 0.01, cex = cex, font = 2)
-  text(1,1,text, cex = cex*1.5)
+  text(1,1,text, cex = cex*1.5, col = col)
   if(line)lines(-5:5, -5:5)
   if(box) box()
   return(invisible())
