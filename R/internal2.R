@@ -48,6 +48,18 @@ len.uni <- function(vec){
   return(xx)
 }
 
+# -------------------------------------------------------------------------
+plot.invi <- function(text = "", mtext = ""){
+  plot(1,1, type = "n", axes = F, xlab = "", ylab = "")
+  mtext(3, text = mtext, line = 0, adj = 0.01)
+  box()
+  text(1,1,text)
+  lines(-5:5, -5:5)
+  return(invisible())
+}
+
+# -------------------------------------------------------------------------
+
 #
 newline <- function(x, split = " "){
   # x <-  "zzzz aaaa ooo"
