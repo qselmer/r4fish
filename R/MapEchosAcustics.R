@@ -10,7 +10,7 @@ MapEchosAcustics <- function(data, sp = sp, stock = stock,
 
   names(data) = tolower(names(data))
   spCol <- r4fish:::.getSp(sp = sp, stock = stock)$acustic
-  lat <- r4fish:::.getLati(sp = sp, stock = stock)
+  lat <- unname(r4fish:::.getLati(sp = sp, stock = stock))
   data <- data[lat_m > lat[1] & lat_m <= lat[2], ]
 
   if(is.element("cruise", colnames(data))){
