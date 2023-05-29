@@ -1,4 +1,4 @@
-renderAcustic <- (cin = ".", cout = ".", file = "data.xlsx",
+renderAcustic <- function(cin = ".", cout = ".", file = "data.xlsx",
                   encoding = "latin", save = T)  {
 
   require(TBE)
