@@ -52,6 +52,11 @@ renderBiometric <- function(cin =  "inputs",
                        stringsAsFactors = FALSE, encoding = encoding)
       name <- toupper(name$NOMBRE_OPERACION[1])
       name <- iconv(x = name, to="ASCII//TRANSLIT")
+
+      name1 <- gsub("\\D", "", name)
+      name1 <- paste0("Cr", name1)
+      base$crucero <- name1
+
     }else{
       if (TBE:::isMF(file = file, sep = sep)) {
         base <- TBE:::readMF(file, sep = sep)
@@ -64,10 +69,6 @@ renderBiometric <- function(cin =  "inputs",
 
     Encoding(base$sp) <- encoding
     base$sp <- iconv(x = base$sp, to="ASCII//TRANSLIT")
-
-    name1 <- gsub("\\D", "", name)
-    name1 <- paste0("Cr", name1)
-    base$crucero <- name1
 
     base$sp <- tolower(base$sp)
     base$buque <- as.character(base$buque)

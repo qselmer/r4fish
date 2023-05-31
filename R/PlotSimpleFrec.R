@@ -81,7 +81,7 @@ PlotSimpleFrec <- function(data = tmp2l,
         y = (y/sum(y, na.rm = T))
 
 
-        if(sumy < n.warnings & show.warnings == T){
+        if(sumy <= n.warnings & show.warnings == T){
           nwarnings <- 1
           cat(paste0("\n","# Posibles lances a filtar:"), fill = TRUE)
           cat(paste0("\n", vesselSet[i]))
