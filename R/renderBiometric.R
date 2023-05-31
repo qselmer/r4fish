@@ -60,8 +60,10 @@ renderBiometric <- function(cin =  "inputs",
     }else{
       if (TBE:::isMF(file = file, sep = sep)) {
         base <- TBE:::readMF(file, sep = sep)
+        name <- toupper(base$crucero[1])
       }else{
         base <- TBE:::readED(file, sep = sep)
+        name <- toupper(base$crucero[1])
       }
     }
 
