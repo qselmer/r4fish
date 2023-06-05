@@ -48,13 +48,13 @@ create.grid <- function(xxlim = c(-86, -70),
 
   filename <- paste("grid", paste0(number2text(by.grid), "degree"), sep = "_")
 
-  if(namesf == "."){grid_spdf <- grid_spdf}else{assign(namesf, value = grid_spdf)}
-  if(namedata == "."){df.coor <- df.coor}else{assign(namedata, value = df.coor)}
+  if(namesf == "."){grid_spdf <- grid_spdf}else{assign(namesf, grid_spdf)}
+  if(namedata == "."){df.coor <- df.coor}else{assign(namedata, df.coor)}
 
   if (saveRda) {
-    save(namedata, file = file.path(cout, paste0(filename,
+    save(get(namedata), file = file.path(cout, paste0(filename,
                                                  "Data", ".rda")))
-    save(namesf, file = file.path(cout, paste0(filename,
+    save(get(namesf), file = file.path(cout, paste0(filename,
                                                "Shapefile", ".rda")))
   }
   return(grid_spdf)
