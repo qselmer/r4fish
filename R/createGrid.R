@@ -52,9 +52,9 @@ create.grid <- function(xxlim = c(-86, -70),
   if(namedata == "."){df.coor <- df.coor}else{assign(namedata, df.coor)}
 
   if (saveRda) {
-    save(get(namedata), file = file.path(cout, paste0(filename,
+    save(list = namedata, file = file.path(cout, paste0(filename,
                                                  "Data", ".rda")))
-    save(get(namesf), file = file.path(cout, paste0(filename,
+    save(list = namesf, file = file.path(cout, paste0(filename,
                                                "Shapefile", ".rda")))
   }
   return(grid_spdf)
