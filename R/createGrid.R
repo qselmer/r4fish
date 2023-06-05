@@ -1,7 +1,8 @@
 create.grid <- function(xxlim = c(-86, -70),
                         yylim = c(-21, -3),
                         by.grid = 0.5, cap = NULL,
-                        saveRda = T, cout = "."){
+                        saveRda = T, cout = ".",
+                        namedata = ".", namesf = "."){
   require(r4fish)
   require(sp)
   require(sf)
