@@ -48,6 +48,17 @@ len.uni <- function(vec){
   return(xx)
 }
 
+
+#
+number2text <- function(x){
+  x <- as.character(x)
+  txt <- switch(x,
+                "0.5" = "half", "1" = "one", "2" = "two",
+                "3" = "three", "4" = "four", "5" = "five",
+                "Number not supported")
+  return(txt)
+}
+
 # -------------------------------------------------------------------------
 plot.invi <- function(text = "", mtext = "", col = 2,  cex = 1, box = T, line = T){
   plot(1,1, type = "n", axes = F, xlab = "", ylab = "")
