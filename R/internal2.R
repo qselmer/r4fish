@@ -50,6 +50,14 @@ len.uni <- function(vec){
 
 
 #
+as.df.table <- function(x, name){
+  y <- as.data.frame(table(x))
+  names(y)[1] <- name
+  names(y) <- tolower(names(y))
+  return(y)
+}
+
+#
 number2text <- function(x){
   x <- as.character(x)
   txt <- switch(x,
