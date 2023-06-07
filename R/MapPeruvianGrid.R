@@ -24,6 +24,7 @@
 #'
 #' @examples
 MapPeruvianGrid <- function(data, colcode = "code" , colval = "freq",
+                            typeval = "#",
                             xxlim = c(-86, -70), yylim = c(-21, -3),
                             by = "onedegree",
                             gradient = c("yellow", "red"),
@@ -47,6 +48,11 @@ MapPeruvianGrid <- function(data, colcode = "code" , colval = "freq",
         shapefile <- r4fish::Grid_isoparalitoral_sf
         info <- r4fish::Grid_isoparalitoral_data
       }else{
+        if(trimws(tolower(by)) == "quarterdegree"){
+          shapefile <- r4fish::Grid_quarterdegree_C_sf
+          info <- r4fish::Grid_quarterdegree_C_data
+
+        }
         stop("grid not found")
       }
     }
@@ -57,8 +63,22 @@ MapPeruvianGrid <- function(data, colcode = "code" , colval = "freq",
                  numeric = data.frame(code = data[colcode], val =  data[colval]))
 
   colfunc <- colorRampPalette(gradient)
-  Colfunc2 <- colfunc(max(coor[,"val"]))
-  coor$colfunc <- Colfunc2[coor[,"val"]]
+
+  if(typeval == "#"){
+
+    minCols = floor(min(coor[,"val"]))
+    maxCols = ceiling(max(coor[,"val"]))
+    totCols = (maxCols - minCols)*10 + 1
+    PalCols = colfunc(totCols)
+    coor$colfunc = round(coor[,"val"],1)*10
+    coor$colfunc2 = coor$colfunc - (minCols*10) + 1
+  }
+
+  if(typeval == "%"){
+    coor[,"val"] = round(coor[,"val"])
+    PalCols = colfunc(101)
+    coor$colfunc2 = coor[,"val"] + 1
+  }
 
   idx_areas <- unique(info[, "code"])
 
@@ -80,8 +100,8 @@ MapPeruvianGrid <- function(data, colcode = "code" , colval = "freq",
     if(nrow(temp) >  0){
       polygon(x = c(temp2$lon[1], temp2$lon[2:nrow(temp2)], temp2$lon[1]),
               y = c(temp2$lat[1], temp2$lat[2:nrow(temp2)], temp2$lat[1]),
-              border = ifelse(is.na(border), temp$colfunc, border),
-              col = temp$colfunc)
+              border = ifelse(is.na(border), PalCols[temp$colfunc2], border),
+              col =  PalCols[temp$colfunc2])
     }
   }
 
@@ -106,24 +126,32 @@ MapPeruvianGrid <- function(data, colcode = "code" , colval = "freq",
   }
 
   if(legend){
-    diffX = 0.04*diff(xxlim)
+
+
+    diffX = 0.03*diff(xxlim)
     diffY = 0.41*diff(yylim)
     posX = min(xxlim) + (0.099)*diff(xxlim)
     posY = min(yylim) + (0.03)*diff(yylim)
 
-
-    minCols = min(coor[, "val"])
-    maxCols = max(coor[, "val"])
-    totCols = maxCols-minCols+1
-
+    if(typeval == "#"){
     legend.krige(x.leg = c(posX, posX+diffX), y.leg = c(posY, posY+diffY),
                  values = minCols:maxCols, vertical=T,
                  col = colfunc(totCols),
                  offset.leg = 0.75)
+    }
+
+    if(typeval == "%"){
+      legend.krige(x.leg = c(posX, posX+diffX), y.leg = c(posY, posY+diffY),
+                   values = 0:100, vertical=T,
+                   col = colfunc(101)[-1],
+                   offset.leg = 0.75)
+    }
+
 
     text(x = (posX+diffX/2), y = (posY+diffY)*0.95, labels = paste0(txtleg),
          cex = 0.8, font = 2)
-  }
+    }
+
 
   if(save){
     FileName = paste("MapPeruvianGrid", by, sep = "_")
