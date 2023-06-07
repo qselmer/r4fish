@@ -8,7 +8,7 @@ create.grid <- function(xxlim = c(-86, -70),
   require(sf)
   require(rgdal)
 
-  crs <- st_crs(r4fish::AIPShapefile_new)
+  crs <- st_crs(r4fish::Grid_isoparalitoral_sf)
   # Definir los límites de la grilla
   limite_grilla <- st_bbox(c(xmin = xxlim[1], ymin = yylim[1], xmax = xxlim[2],
                              ymax = yylim[2]))
