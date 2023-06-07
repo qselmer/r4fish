@@ -29,7 +29,7 @@ assignerPeruvianGrid <- function(data, xlon = "lon",
         shapefile <- r4fish::Grid_isoparalitoral_sf
         info <- r4fish::Grid_isoparalitoral_data
       }else{
-        if(trimws(tolower(by)) == "isoparalitoral"){
+        if(trimws(tolower(by)) == "quarterdegree"){
           shapefile <- r4fish::Grid_quarterdegree_C_sf
           info <- r4fish::Grid_quarterdegree_C_data
           }else{
