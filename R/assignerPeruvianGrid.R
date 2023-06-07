@@ -25,14 +25,20 @@ assignerPeruvianGrid <- function(data, xlon = "lon",
       shapefile <- r4fish::Grid_halfdegree_B_sf
       info <- r4fish::Grid_halfdegree_B_data
     }else{
-      if(trimws(tolower(by)) == "isopalitoral"){
+      if(trimws(tolower(by)) == "isoparalitoral"){
         shapefile <- r4fish::Grid_isoparalitoral_sf
         info <- r4fish::Grid_isoparalitoral_data
       }else{
-        stop("grid not found")
+        if(trimws(tolower(by)) == "isoparalitoral"){
+          shapefile <- r4fish::Grid_quarterdegree_C_sf
+          info <- r4fish::Grid_quarterdegree_C_data
+          }else{
+            stop("grid not found")
+          }
       }
     }
   }
+
 
   coor <- switch(class(data), matrix = data[, c(xlon, ylat)],
                  data.frame = data.frame(lon = data[, xlon], lat = data[, ylat]),
