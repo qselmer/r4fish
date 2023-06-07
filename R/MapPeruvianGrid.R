@@ -52,8 +52,10 @@ MapPeruvianGrid <- function(data, colcode = "code" , colval = "freq",
           shapefile <- r4fish::Grid_quarterdegree_C_sf
           info <- r4fish::Grid_quarterdegree_C_data
 
-        }
+        }else{
         stop("grid not found")
+
+        }
       }
     }
   }
