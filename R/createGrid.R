@@ -44,7 +44,7 @@ create.grid <- function(xxlim = c(-86, -70),
 
   # Asignar los datos del marco de datos a SpatialPolygonsDataFrame
   grid_spdf <- SpatialPolygonsDataFrame(grid_sp, data = grid_df)
-  grid_spdf <- spTransform(grid_spdf, CRSobj = proj4string(r4fish::AIPShapefile_new))
+  grid_spdf <- spTransform(grid_spdf, CRSobj = proj4string(r4fish::Grid_isoparalitoral_sf))
 
   filename <- paste("grid", paste0(number2text(by.grid), "degree"), sep = "_")
 
