@@ -61,7 +61,7 @@ as.df.table <- function(x, name){
 number2text <- function(x){
   x <- as.character(x)
   txt <- switch(x,
-                "0.5" = "half", "1" = "one", "2" = "two",
+                "0.25" = "quarter","0.5" = "half", "1" = "one", "2" = "two",
                 "3" = "three", "4" = "four", "5" = "five",
                 "Number not supported")
   return(txt)
