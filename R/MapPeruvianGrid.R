@@ -44,7 +44,7 @@ MapPeruvianGrid <- function(data, colcode = "code" , colval = "freq",
       shapefile <- r4fish::Grid_halfdegree_B_sf
       info <- r4fish::Grid_halfdegree_B_data
     }else{
-      if(trimws(tolower(by)) == "isopalitoral"){
+      if(trimws(tolower(by)) == "isoparalitoral"){
         shapefile <- r4fish::Grid_isoparalitoral_sf
         info <- r4fish::Grid_isoparalitoral_data
       }else{
