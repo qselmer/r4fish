@@ -49,7 +49,7 @@ assignerPeruvianGrid <- function(data, xlon = "lon",
   coordinates(coor) <- coor
   proj4string(coor) <- proj4string(shapefile)
   coor2 <- over(x = coor, y = shapefile)
-  if(metadata){coor2 <- coor2}else{coor2 <- coor2["code", ]}
+  if(metadata){coor2 <- coor2}else{coor2 <- coor2[, "code"]}
   if(save){
     fileName = paste0("assignerPeruvianGrid-",Sys.Date(),".csv")
     write.table(coor2, file.path(cout, fileName), row.names = F, sep = ",")
