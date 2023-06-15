@@ -117,7 +117,7 @@ nameTw <- function(data){
 trimwsDF <- function(data){
   class.data <- unname(unlist(lapply(data, class)))
   n.class <- which(class.data == "character")
-  data[, n.class] <- apply(data[, n.class], trimws)
+  data[, n.class] <- apply(data[, n.class],2,trimws)
   return(data)
 }
 # -------------------------------------------------------------------------
