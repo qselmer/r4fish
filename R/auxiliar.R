@@ -208,7 +208,7 @@ inverse <- function (f, lower = -100, upper = 100) {
 plotNULL <- function(mtxt = "", txt = "", col.txt = 2,  cex.txt = 1,
                      madj = 0.01, mline = 0,  box = T, line = T){
   plot(1,1, type = "n", axes = F, xlab = "", ylab = "")
-  mtext(3, txt = mtxt, line = mline, adj = madj, cex = cex.txt, font = 2)
+  mtext(side = 3, txt = mtxt, line = mline, adj = madj, cex = cex.txt, font = 2)
   text(1,1,txt, cex = cex.txt*1.5, col = col.txt)
   if(line)lines(-5:5, -5:5)
   if(box) box()
