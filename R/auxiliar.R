@@ -12,29 +12,32 @@ asn <- function(x){
 }
 # -------------------------------------------------------------------------
 ## convierte de factor a numeric
-asnc <-function(x){
+c2n <-function(x){
   x <- asn(asc(x))
   return(x)
 }
 # -------------------------------------------------------------------------
 ## convierte una matriz en un data.frame. opcion: nombre de las filas
-asm2df <-  function(mat, row.names = T){
-  namesx <- rownames(mat)
-  x <- as.data.frame.matrix(mat)
-  if(row.names){rownames(x) <- namesx}else{rownames(x) <- NULL}
-  return(x)
+mt2df <-  function(mt, row.nm = NA){
+  df <- as.data.frame.matrix(mt)
+  if(row.nm = 0){rownames(df) <-  rownames(mt)}
+  if(row.nm > 0){rownames(df) <- mt[,row.nm]}
+  if(is.na(row.nm)){rownames(df) <- NULL}
+  return(df)
 }
 # -------------------------------------------------------------------------
 ## convierte un data.frame a una matriz. opcion: nombre de las filas
-asdf2m <- function(df, row.n = 0){
-  if(row.n > 0){rownames(df) <- df[,row.n]}else{rownames(df) <- NULL}
-  tmp <- as.matrix.data.frame(df)
-  return(tmp)
+df2mt <- function(df, row.nm = NA){
+  mt <- as.matrix.data.frame(df)
+  if(row.nm = 0){rownames(mt) <-  rownames(df)}
+  if(row.nm > 0){rownames(mt) <- df[,row.nm]}
+  if(is.na(row.nm)){rownames(mt) <- NULL}
+  return(mt)
 }
 # -------------------------------------------------------------------------
-## convierte a tabla de frecuencia una variable y lo convierte a data.frame.
-astb2df <- function(x, name){
-  y <- as.data.frame(table(x))
+## convierte una tabla de frecuencia a un data.frame.
+tb2df <- function(vec, name){
+  y <- as.data.frame(table(vec))
   names(y)[1] <- name
   names(y) <- tolower(names(y))
   return(y)
@@ -70,7 +73,6 @@ number2text <- function(x){
 # -------------------------------------------------------------------------
 ## devuelve el texto en el numero de lineas según split
 newline <- function(x, split = " "){
-  # x <-  "zzzz aaaa ooo"
   x <- unlist(strsplit(x,split))
   charx <- x[1]
   for(u in 2:length(x)){
@@ -101,8 +103,22 @@ scaleNasc <- function(vect, k = 500, na.rm = T){
 }
 # -------------------------------------------------------------------------
 ## redondea un número hacia arriba al múltiplo más cercano de to
-roundUp = function(x, to = 5){
+roundUp <- function(x, to = 5){
   to*(x%/%to + as.logical(x%%to))
+}
+# -------------------------------------------------------------------------
+## obtiene en minúscula los nombres de un data.frame
+nameTw <- function(data){
+  out <- tolower(names(data))
+  return(out)
+}
+# -------------------------------------------------------------------------
+## retira espacio en blanco a la izquierda y derecha para ch. data.frame
+trimwsDF <- function(data){
+  class.data <- unname(unlist(lapply(data, class)))
+  n.class <- which(class.data == "character")
+  data[, n.class] <- apply(data[, n.class], trimws)
+  return(data)
 }
 # -------------------------------------------------------------------------
 ## agrega secuencias a un vector dado en ambos lados o solo uno
@@ -183,14 +199,14 @@ year2date <- function (yeardec){
   return(res)
 }
 # -------------------------------------------------------------------------
-## función para calcular la inversa de una función f
+## calcula la inversa de una función f
 inverse <- function (f, lower = -100, upper = 100) {
   function (y) uniroot((function (x) f(x) - y), lower = lower, upper = upper)[1]
   }
 # -------------------------------------------------------------------------
-## función para calcular la inversa de una función f
-plotInvi <- function(txt = "", mtxt = "", col.txt = 2,  cex.txt = 1,
-                      madj = 0.01, mline = 0,  box = T, line = T){
+## plotea un gráfico vacio
+plotNULL <- function(mtxt = "", txt = "", col.txt = 2,  cex.txt = 1,
+                     madj = 0.01, mline = 0,  box = T, line = T){
   plot(1,1, type = "n", axes = F, xlab = "", ylab = "")
   mtext(3, txt = mtxt, line = mline, adj = madj, cex = cex.txt, font = 2)
   text(1,1,txt, cex = cex.txt*1.5, col = col.txt)
@@ -199,7 +215,7 @@ plotInvi <- function(txt = "", mtxt = "", col.txt = 2,  cex.txt = 1,
   return(invisible())
 }
 # -------------------------------------------------------------------------
-## obtiene la version de mi paquete
+## obtiene la versión de mi paquete
 getR4fish <- function (pkg = "r4fish"){
   pd <- utils::packageDescription(pkg)
   v <- paste0(pd$Package, "_v", pd$Version)
@@ -212,7 +228,7 @@ getR4fish <- function (pkg = "r4fish"){
 }
 # -------------------------------------------------------------------------
 ## crea un pie de pagina para los plots
-txtFoot <- function (string = get.r4fish(), cex = 0.5, do.flag = NULL)
+txtFoot <- function (string = getR4fish(), cex = 0.5, do.flag = NULL)
 {
   if (is.null(do.flag)) {
     if (mean(par()$mfrow) > 1) {
