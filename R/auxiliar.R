@@ -20,7 +20,7 @@ c2n <-function(x){
 ## convierte una matriz en un data.frame. opcion: nombre de las filas
 mt2df <-  function(mt, row.nm = NA){
   df <- as.data.frame.matrix(mt)
-  if(row.nm = 0){rownames(df) <-  rownames(mt)}
+  if(row.nm == 0){rownames(df) <-  rownames(mt)}
   if(row.nm > 0){rownames(df) <- mt[,row.nm]}
   if(is.na(row.nm)){rownames(df) <- NULL}
   return(df)
@@ -29,7 +29,7 @@ mt2df <-  function(mt, row.nm = NA){
 ## convierte un data.frame a una matriz. opcion: nombre de las filas
 df2mt <- function(df, row.nm = NA){
   mt <- as.matrix.data.frame(df)
-  if(row.nm = 0){rownames(mt) <-  rownames(df)}
+  if(row.nm == 0){rownames(mt) <-  rownames(df)}
   if(row.nm > 0){rownames(mt) <- df[,row.nm]}
   if(is.na(row.nm)){rownames(mt) <- NULL}
   return(mt)
