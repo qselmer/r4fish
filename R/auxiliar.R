@@ -53,9 +53,9 @@ first <- function(x){
 }
 # -------------------------------------------------------------------------
 ## longitud de elementos únicos
-len.uni <- function(vec){
-  xx <- length(unique(vec))
-  return(xx)
+lenuni <- function(vec){
+  out <- length(unique(vec))
+  return(out)
 }
 # -------------------------------------------------------------------------
 ## devuelve el numero en texto
@@ -106,9 +106,9 @@ roundUp = function(x, to = 5){
 }
 # -------------------------------------------------------------------------
 ## agrega secuencias a un vector dado en ambos lados o solo uno
-add.seq <- function(vec, add = c(2, 0)){
+addSeq <- function(vec, add = c(2, 0)){
   rz <- diff(vec)
-  if(len.uni(rz) > 1){
+  if(lenuni(rz) > 1){
     errorCondition("Value sequence error")}else{
       rz <- rz[1]
     }
@@ -189,11 +189,10 @@ inverse <- function (f, lower = -100, upper = 100) {
   }
 # -------------------------------------------------------------------------
 ## función para calcular la inversa de una función f
-plot.invi <- function(txt = "", mtxt = "",
-                      col.txt = 2,  cex.txt = 1,
-                      madj = 0.01, box = T, line = T){
+plotInvi <- function(txt = "", mtxt = "", col.txt = 2,  cex.txt = 1,
+                      madj = 0.01, mline = 0,  box = T, line = T){
   plot(1,1, type = "n", axes = F, xlab = "", ylab = "")
-  mtext(3, txt = mtxt, line = 0, adj = madj, cex = cex.txt, font = 2)
+  mtext(3, txt = mtxt, line = mline, adj = madj, cex = cex.txt, font = 2)
   text(1,1,txt, cex = cex.txt*1.5, col = col.txt)
   if(line)lines(-5:5, -5:5)
   if(box) box()
@@ -201,7 +200,7 @@ plot.invi <- function(txt = "", mtxt = "",
 }
 # -------------------------------------------------------------------------
 ## obtiene la version de mi paquete
-get.r4fish <- function (pkg = "r4fish"){
+getR4fish <- function (pkg = "r4fish"){
   pd <- utils::packageDescription(pkg)
   v <- paste0(pd$Package, "_v", pd$Version)
   if (is.null(pd$GithubRef)) {
