@@ -155,30 +155,83 @@
   }
 }
 # -------------------------------------------------------------------------
+## obtiene los parámetros globales de la especie: madurez
+.getMad <- function(sp = NA, stock = NA) {
+  spx <- .getSp(sp = sp, stock = stock)
+  pars <- unname(unlist(spx[, c("maturityMat1", "maturityMat2")]))
+  pars <- list(par1 = pars[1], par2 = pars[2])
+  return(pars)
+}
+# -------------------------------------------------------------------------
 ## obtiene la probabilidad de la especie a la talla x. opcional da la función inversa
+.length2mad <- function(sp = NA, stock = NA, mad = NA, funx.inv = F){
+  marks <- .getMarks(sp = sp, stock = stock, phi = F)
+  if(is.list(mad)){
+    mad <- mad
+  }else{
+    if(is.na(mad)){mad <- .getMad(sp = sp, stock = stock)}
+  }
 
+  w.spx <- 1/(1 + exp((mad[[1]] - (marks*mad[[2]]))))
 
+  if(funx.inv){
+    require(rootSolve)
+    f <- function(x) 1/(1 + exp((mad[[1]] - (x*mad[[2]]))))
+    invf <- inverse(f = f, lower = 0, upper = 100)
+  }
 
-
-
-
-
-
-
-imageSp <- function(sp, stock){
-
-  require(httr)
+  if(funx.inv) {
+    return(list(prob = w.spx, inv.funx = invf))
+  }else{
+    return(w.spx)
+  }
+}
+# -------------------------------------------------------------------------
+## obtiene tallas de pre-reclutas
+.getPrerecruits <- function(sp = NA, stock = NA){
+  spx <- .getSp(sp = sp, stock = stock)
+  rcr <- unname(unlist(spx[, c("prereclutas")]))
+  rcr <- asn(unlist(strsplit(x = rcr, split ="-")))
+  rcr <- seq(rcr[1], rcr[2], by = spx[, "lengthBin"])
+  return(rcr)
+}
+# -------------------------------------------------------------------------
+## obtiene tallas de reclutas
+.getRecruits <- function(sp = NA, stock = NA){
+  spx <- .getSp(sp = sp, stock = stock)
+  rcr <- unname(unlist(spx[, c("reclutas")]))
+  rcr <- asn(unlist(strsplit(x = rcr, split ="-")))
+  rcr <- seq(rcr[1], rcr[2], by = spx[, "lengthBin"])
+  return(rcr)
+}
+# -------------------------------------------------------------------------
+## obtiene tallas de adultos
+.getAdults <- function(sp = NA, stock = NA){
+  spx <- .getSp(sp = sp, stock = stock)
+  rcr <- unname(unlist(spx[, c("adulto")]))
+  rcr <- asn(unlist(strsplit(x = rcr, split ="-")))
+  rcr <- seq(rcr[1], rcr[2], by = spx[, "lengthBin"])
+  return(rcr)
+}
+# -------------------------------------------------------------------------
+## obtiene informacion de medidas de HCR
+.getTAC <- function(sp = NA, stock = NA){
+  spx <- .getSp(sp = sp, stock = stock)
+  spTAC <- unname(unlist(spx[, c("BDRlim", "Eref")]))
+  spTAC <- list(BDR = spTAC[1], E = spTAC[2])
+  return(spTAC)
+}
+# -------------------------------------------------------------------------
+##
+.imageSp <- function(sp, stock, x = 0, y = 0, cex = 2){
   require(png)
-  spx <- r4fish:::.getSp(sp = sp, stock = stock)
-  url <- spx$photo
-  # Descargar la imagen desde la URL
-  response <- GET(url)
-  content <- content(response, as = "raw")
-  # Guardar la imagen en un archivo temporal
-  temp_file <- tempfile(fileext = ".png")
-  writeBin(content, temp_file)
-  imagen <- readPNG(temp_file)
-  plot(NA, xlim = c(1, dim(imagen)[2]), ylim = c(1, dim(imagen)[1]), type = "n", xlab = "", ylab = "")
-  rasterImage(imagen, 1, 1, dim(imagen)[2], dim(imagen)[1])
+  path <- paste0(sp, ".png")
+  templ <- system.file("fig", path, package = "r4fish")
+  img <- readPNG(templ)
+  asp <- dim(img)[2] / dim(img)[1]
+  rasterImage(img, x, y, x+asp*cex, y+asp*cex)
   return(invisible())
 }
+# -------------------------------------------------------------------------
+
+
