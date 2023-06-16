@@ -37,7 +37,7 @@ mapPeru <- function (xlim = c(-86, -70), ylim = c(-21, -3), xlab = "",
 
   if(isTRUE(dprt)){
     map_peru <- r4fish::map_peru
-    plot(x = map_peru, add = T, col = col.map, border = border.map)
+    plot(map_peru, add = T, col = col.map, border = border.map)
   }
 
   if (nprof > 1) {

@@ -200,9 +200,13 @@ year2date <- function (yeardec){
 }
 # -------------------------------------------------------------------------
 ## calcula la inversa de una función f
-inverse <- function (f, lower = -100, upper = 100) {
-  function (y) uniroot((function (x) f(x) - y), lower = lower, upper = upper)[1]
+inverse <- function(f, lower = -100, upper = 100) {
+  function(y) {
+    sapply(y, function(y_val) {
+      uniroot(function(x) f(x) - y_val, lower = lower, upper = upper)$root
+    })
   }
+}
 # -------------------------------------------------------------------------
 ## plotea un gráfico vacio
 plotNULL <- function(mtxt = "", txt = "", col.txt = 2,  cex.txt = 1,
