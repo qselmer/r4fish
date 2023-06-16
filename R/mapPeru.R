@@ -1,8 +1,8 @@
-mapaPeru <- function (xlim = c(-86, -70), ylim = c(-21, -3), xlab = "",
-                      ylab = "", col.map = "gray80", border.map = "gray10",
-                      nprof = 2, space.prof = 3, dprt = T, area.iso = FALSE,
-                      harbor = 1, cex.harbor = 1, col.harbor = 1, cex.axis = 1,
-                      col.sea = NA){
+mapPeru <- function (xlim = c(-86, -70), ylim = c(-21, -3), xlab = "",
+                     ylab = "", col.map = "gray80", border.map = "gray10",
+                     nprof = 2, space.prof = 3, dprt = T, area.iso = FALSE,
+                     harbor = 1, cex.harbor = 1, col.harbor = 1, cex.axis = 1,
+                     col.sea = NA){
 
   axis.Lon <- paste(abs(seq(xlim[1], xlim[2], by = 2)), "°W")
   axis.Lat <- paste(abs(seq(ylim[1], ylim[2], by = 2)), "°S")
@@ -36,7 +36,7 @@ mapaPeru <- function (xlim = c(-86, -70), ylim = c(-21, -3), xlab = "",
           col = col.map, border = border.map)
 
   if(isTRUE(dprt)){
-    mapa_peru <- r4fish::mapa_peru
+    map_peru <- r4fish::map_peru
     plot(x = map_peru, add = T, col = col.map, border = border.map)
   }
 
