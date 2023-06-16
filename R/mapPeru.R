@@ -3,7 +3,7 @@ mapPeru <- function (xlim = c(-86, -70), ylim = c(-21, -3), xlab = "",
                      nprof = 2, space.prof = 3, dprt = T, area.iso = FALSE,
                      harbor = 1, cex.harbor = 1, col.harbor = 1, cex.axis = 1,
                      col.sea = NA){
-
+  require(sp)
   axis.Lon <- paste(abs(seq(xlim[1], xlim[2], by = 2)), "°W")
   axis.Lat <- paste(abs(seq(ylim[1], ylim[2], by = 2)), "°S")
   Encoding(axis.Lon) <- "UTF-8"
