@@ -1,6 +1,6 @@
 mapPeru <- function (xlim = c(-86, -70), ylim = c(-21, -3), xlab = "",
                      ylab = "", col.map = "khaki1", border.map = "gray10",
-                     nprof = 2, space.prof = 3, dprt = T, grid = "isoparalitoral",
+                     nprof = 2, space.prof = 3, dprt = T, grid = NA,
                      harbor = 1, cex.harbor = 0.6, col.harbor = 1, cex.axis = 1,
                      col.sea = F, title = "", compass =F){
   require(sp)
@@ -43,7 +43,7 @@ mapPeru <- function (xlim = c(-86, -70), ylim = c(-21, -3), xlab = "",
     }
   }
 
-  if (!is.na(shapefile)) {
+  if (!is.na(grid)) {
     plot(shapefile, add = T, col = NA, border = "gray75")
     }
 
