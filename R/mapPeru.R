@@ -1,6 +1,6 @@
 mapPeru <- function (xlim = c(-86, -70), ylim = c(-21, -3), xlab = "",
                      ylab = "", col.map = "khaki1", border.map = "gray10",
-                     nprof = 2, space.prof = 3, dprt = T, grid = NA,
+                     nprof = 2, space.prof = 3, dprt = F, grid = NA,
                      harbor = 1, cex.harbor = 0.6, col.harbor = 1, cex.axis = 1,
                      col.sea = F, title = "", compass =F){
   require(sp)
@@ -41,7 +41,7 @@ mapPeru <- function (xlim = c(-86, -70), ylim = c(-21, -3), xlab = "",
         }
       }
     }
-    plot(shapefile, add = T, col = NA, border = "gray75")
+    sp::plot(shapefile, add = T, col = NA, border = "gray75")
     }
 
   linePeru <- r4fish::map_coastline
@@ -51,7 +51,7 @@ mapPeru <- function (xlim = c(-86, -70), ylim = c(-21, -3), xlab = "",
 
   if(isTRUE(dprt)){
     map_peru <- r4fish::map_peru
-    plot(map_peru, add = T, col = col.map, border = border.map)
+    sp::plot(map_peru, add = T, col = col.map, border = border.map)
   }
 
   if (nprof > 1) {
