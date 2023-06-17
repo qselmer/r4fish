@@ -1,8 +1,8 @@
 mapPeru <- function (xlim = c(-86, -70), ylim = c(-21, -3), xlab = "",
-                     ylab = "", col.map = "gray80", border.map = "gray10",
-                     nprof = 2, space.prof = 3, dprt = T, area.iso = FALSE,
-                     harbor = 1, cex.harbor = 1, col.harbor = 1, cex.axis = 1,
-                     col.sea = NA){
+                     ylab = "", col.map = "khaki1", border.map = "gray10",
+                     nprof = 2, space.prof = 3, dprt = T, grid = "isoparalitoral",
+                     harbor = 1, cex.harbor = 0.6, col.harbor = 1, cex.axis = 1,
+                     col.sea = F, title = ""){
   require(sp)
   axis.Lon <- paste(abs(seq(xlim[1], xlim[2], by = 2)), "°W")
   axis.Lat <- paste(abs(seq(ylim[1], ylim[2], by = 2)), "°S")
@@ -17,17 +17,34 @@ mapPeru <- function (xlim = c(-86, -70), ylim = c(-21, -3), xlab = "",
   plot(1, xlim = xlim2, ylim = ylim, axes = FALSE, xlab = xlab,
        ylab = ylab)
 
-  if(!is.na(col.sea)){
+  if(isTRUE(col.sea)){
     #lightblue
     x_limits <- par("usr")[1:2]
     y_limits <- par("usr")[3:4]
     rect(x_limits[1], y_limits[1], x_limits[2], y_limits[2],
-         col = col.sea)
+         col = "lightblue")
   }
 
-  if (isTRUE(area.iso)) {
-    infIso <- r4fish::Grid_isoparalitoral_sf
-    plot(x = infIso, add = T, col = NA, border = "lightgray")
+  if(grid == "onedegree"){
+    shapefile <- r4fish::Grid_onedegree_A_sf
+  }else{
+    if(grid == "halfdegree"){
+      shapefile <- r4fish::Grid_halfdegree_B_sf
+      }else{
+      if(grid == "quarterdegree"){
+        shapefile <- r4fish::Grid_quarterdegree_C_sf
+      }else{
+        if(grid == "isoparalitoral"){
+          shapefile <- r4fish::Grid_isoparalitoral_sf
+        }else{
+          shapefile <- NA
+        }
+      }
+    }
+  }
+
+  if (!is.na(shapefile)) {
+    plot(shapefile, add = T, col = NA, border = "gray75")
     }
 
   linePeru <- r4fish::map_coastline
@@ -66,5 +83,6 @@ mapPeru <- function (xlim = c(-86, -70), ylim = c(-21, -3), xlab = "",
   }
 
   box()
+  mtext(text = title, side = 3, line = -1.5, adj = 0.95)
   return(invisible())
 }
