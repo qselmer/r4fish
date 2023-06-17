@@ -83,6 +83,11 @@ mapPeru <- function (xlim = c(-86, -70), ylim = c(-21, -3), xlab = "",
   }
 
   box()
+  par(xpd=TRUE)
+  legend("bottomleft", legend="Escala", bty="n", cex=0.8,
+         fill="lightgray", border="gray",
+         inset=c(0.02, 0.02))
+
   mtext(text = title, side = 3, line = -1.5, adj = 0.95)
 
   if(compass){
