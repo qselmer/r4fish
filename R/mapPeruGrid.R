@@ -23,7 +23,7 @@
 #' @export
 #'
 #' @examples
-MapPeruvianGrid <- function(data, colcode = "code" , colval = "freq",
+MapPeruGrid <- function(data, colcode = "code" , colval = "freq",
                             typeval = "#",
                             xxlim = c(-86, -70), yylim = c(-21, -3),
                             by = "onedegree",
@@ -35,30 +35,28 @@ MapPeruvianGrid <- function(data, colcode = "code" , colval = "freq",
                             xaxis = 1, yaxis = 4,
                             portImport = 2, save = T, cout = "."){
   require(geoR)
-  # by = c("onedegree", "halfdegree", "isopalitoral")
+
   if(trimws(tolower(by)) == "onedegree"){
     shapefile <- r4fish::Grid_onedegree_A_sf
     info <- r4fish::Grid_onedegree_A_data
-  }else{
-    if(trimws(tolower(by)) == "halfdegree"){
-      shapefile <- r4fish::Grid_halfdegree_B_sf
-      info <- r4fish::Grid_halfdegree_B_data
     }else{
-      if(trimws(tolower(by)) == "isoparalitoral"){
-        shapefile <- r4fish::Grid_isoparalitoral_sf
-        info <- r4fish::Grid_isoparalitoral_data
-      }else{
-        if(trimws(tolower(by)) == "quarterdegree"){
-          shapefile <- r4fish::Grid_quarterdegree_C_sf
-          info <- r4fish::Grid_quarterdegree_C_data
-
+      if(trimws(tolower(by)) == "halfdegree"){
+        shapefile <- r4fish::Grid_halfdegree_B_sf
+        info <- r4fish::Grid_halfdegree_B_data
         }else{
-        stop("grid not found")
-
+          if(trimws(tolower(by)) == "quarterdegree"){
+            shapefile <- r4fish::Grid_quarterdegree_C_sf
+            info <- r4fish::Grid_quarterdegree_C_data
+            }else{
+              if(trimws(tolower(by)) == "isoparalitoral"){
+                shapefile <- r4fish::Grid_isoparalitoral_sf
+                info <- r4fish::Grid_isoparalitoral_data
+                }else{
+                  stop("grid not found")
+                }
+            }
         }
-      }
     }
-  }
 
   coor <- switch(class(data), matrix = data[, c(colcode, colval)],
                  data.frame = data.frame(code = data[, colcode], val = data[, colval]),

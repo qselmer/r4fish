@@ -2,7 +2,7 @@ mapPeru <- function (xlim = c(-86, -70), ylim = c(-21, -3), xlab = "",
                      ylab = "", col.map = "khaki1", border.map = "gray10",
                      nprof = 2, space.prof = 3, dprt = T, grid = "isoparalitoral",
                      harbor = 1, cex.harbor = 0.6, col.harbor = 1, cex.axis = 1,
-                     col.sea = F, title = ""){
+                     col.sea = F, title = "", compass =F){
   require(sp)
   axis.Lon <- paste(abs(seq(xlim[1], xlim[2], by = 2)), "°W")
   axis.Lat <- paste(abs(seq(ylim[1], ylim[2], by = 2)), "°S")
@@ -84,5 +84,16 @@ mapPeru <- function (xlim = c(-86, -70), ylim = c(-21, -3), xlab = "",
 
   box()
   mtext(text = title, side = 3, line = -1.5, adj = 0.95)
+
+  if(compass){
+    require(png)
+    templ <- system.file("fig", "0compass.png", package = "r4fish")
+    img <- readPNG(templ)
+    asp <- dim(img)[2] / dim(img)[1]
+    xx <- xlim[2] -2
+    yy <-  ylim[2] -5
+    rasterImage(image = img, xx, yy, xx+asp*1.75,yy+asp*3.75, interpolate = T)
+
+  }
   return(invisible())
 }
