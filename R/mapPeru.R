@@ -1,6 +1,6 @@
 mapPeru <- function (xlim = c(-86, -70), ylim = c(-21, -3), xlab = "",
                      ylab = "", col.map = "khaki1", border.map = "gray10",
-                     nprof = 2, space.prof = 3, dprt = F, grid = NA,
+                     nprof = 1, space.prof = 3, dprt = F, grid = NA,
                      harbor = 1, cex.harbor = 0.6, col.harbor = 1, cex.axis = 1,
                      col.sea = F, title = "", compass =F){
   require(sp)
@@ -61,11 +61,13 @@ mapPeru <- function (xlim = c(-86, -70), ylim = c(-21, -3), xlab = "",
     }
   }
 
+  if(harbor > 0){
   puertosPeru <- r4fish::map_harbordata
   idx <- which(puertosPeru[, paste0("shw.", harbor)] == 1)
   puertosPeru <- puertosPeru[idx, ]
   text(puertosPeru$lon, puertosPeru$lat, labels = puertosPeru$name,
        pos = 4, col = col.harbor, cex = cex.harbor)
+  }
 
   axis(2, seq(ylim[1], ylim[2], by = 1), labels = F, las = 1,
        cex.axis = cex.axis, hadj = 0.5, tck = -0.01)
@@ -88,9 +90,9 @@ mapPeru <- function (xlim = c(-86, -70), ylim = c(-21, -3), xlab = "",
     templ <- system.file("fig", "0compass.png", package = "r4fish")
     img <- readPNG(templ)
     asp <- dim(img)[2] / dim(img)[1]
-    xx <- xlim[2] -2
-    yy <-  ylim[2] -5
-    rasterImage(image = img, xx, yy, xx+asp*1.75,yy+asp*3.75, interpolate = T)
+    xx <- xlim[2] -2.5
+    yy <-  ylim[2] -3
+    rasterImage(image = img, xx, yy, xx+asp*2.5,yy+asp*2.5, interpolate = T)
 
   }
   return(invisible())
