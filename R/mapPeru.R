@@ -25,25 +25,22 @@ mapPeru <- function (xlim = c(-86, -70), ylim = c(-21, -3), xlab = "",
          col = "lightblue")
   }
 
-  if(grid == "onedegree"){
-    shapefile <- r4fish::Grid_onedegree_A_sf
-  }else{
-    if(grid == "halfdegree"){
-      shapefile <- r4fish::Grid_halfdegree_B_sf
+  if (!is.na(grid)) {
+    if(grid == "onedegree"){
+      shapefile <- r4fish::Grid_onedegree_A_sf
+    }else{
+      if(grid == "halfdegree"){
+        shapefile <- r4fish::Grid_halfdegree_B_sf
       }else{
-      if(grid == "quarterdegree"){
-        shapefile <- r4fish::Grid_quarterdegree_C_sf
-      }else{
-        if(grid == "isoparalitoral"){
-          shapefile <- r4fish::Grid_isoparalitoral_sf
+        if(grid == "quarterdegree"){
+          shapefile <- r4fish::Grid_quarterdegree_C_sf
         }else{
-          shapefile <- NA
+          if(grid == "isoparalitoral"){
+            shapefile <- r4fish::Grid_isoparalitoral_sf
+          }
         }
       }
     }
-  }
-
-  if (!is.na(grid)) {
     plot(shapefile, add = T, col = NA, border = "gray75")
     }
 
