@@ -47,7 +47,7 @@ renderBiometric <- function(cin =  "inputs",
                                                            n = 1), pattern = x))]
 
     if (TBE:::isImarsis(file = file, sep = sep) | TBE:::isImarsis2(file = file, sep = sep)) {
-      base <- TBE:::convertTBEbiomFormat(file, sep = sep)
+      base <- TBE:::convertTBEbiomFormat(file, sep = sep, encoding = encoding)
       name <- read.csv(file = file, sep = sep,
                        stringsAsFactors = FALSE, encoding = encoding)
       name <- toupper(name$NOMBRE_OPERACION[1])
