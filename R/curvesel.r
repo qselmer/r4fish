@@ -21,7 +21,7 @@ curve.sel <- function(sp = NA,
 
   require(ggplot2)
   #---
-  if(is.na(marks)){marks <- r4fish:::.getMarks(sp = sp, stock = stock)}
+  if(is.na(marks[1])){marks <- r4fish:::.getMarks(sp = sp, stock = stock)}
   sp <- r4fish:::.getSp(sp = sp, stock = stock)
 
   if(all(is.na(par))){
