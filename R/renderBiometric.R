@@ -4,9 +4,10 @@
 #' @param cin vector de caracteres que contienen la ruta de entrada
 #' @param cout vector de caracteres que contienen la ruta de salida
 #' @param file vector de caracteres que contienen el nombre del archivo
+#' @param encoding vector de caracteres para tipo de codificacion
 #' @param save logico; ¿Se deben guardar el archivo?
 #'
-#' @return
+#' @return base de datos biométrico
 #' @export
 #'
 #' @examples
@@ -19,14 +20,14 @@ renderBiometric <- function(cin =  "inputs",
                             cout = ".",
                             file = "data.xlsx",
                             encoding = "latin",
-                            save = T){
-  require(rio)
-  require(tools)
-  require(TBE)
+                            save = T, ...){
+  # require(rio)
+  # require(tools)
+  # require(TBE)
   # -------------------------------------------------------------------------
   file <- file.path(path = cin, file)
   if(is.na(cout)){cout = cin}
-  if (is.null(file)) {
+  if(is.null(file)){
     return(NULL)
   }
 
@@ -41,24 +42,22 @@ renderBiometric <- function(cin =  "inputs",
   }
 
   if(pattern == "csv"){
-
     sep <- c(",", ";")
     sep <- sep[sapply(sep, function(x) grepl(x = readLines(con = file,
                                                            n = 1), pattern = x))]
 
-    if (TBE:::isImarsis(file = file, sep = sep) | TBE:::isImarsis2(file = file, sep = sep)) {
+    if(TBE:::isImarsis(file = file, sep = sep) | TBE:::isImarsis2(file = file, sep = sep)){
       base <- TBE:::convertTBEbiomFormat(file, sep = sep, encoding = encoding)
       name <- read.csv(file = file, sep = sep,
                        stringsAsFactors = FALSE, encoding = encoding)
       name <- toupper(name$NOMBRE_OPERACION[1])
-      name <- iconv(x = name, to="ASCII//TRANSLIT")
+      name <- iconv(x = name, to = "ASCII//TRANSLIT")
 
       name1 <- gsub("\\D", "", name)
       name1 <- paste0("Cr", name1)
       base$crucero <- name1
-
     }else{
-      if (TBE:::isMF(file = file, sep = sep)) {
+      if(TBE:::isMF(file = file, sep = sep)){
         base <- TBE:::readMF(file, sep = sep)
         name <- toupper(base$crucero[1])
       }else{
@@ -72,11 +71,11 @@ renderBiometric <- function(cin =  "inputs",
     Encoding(base$sp) <- encoding
     base$sp <- iconv(x = base$sp, to="ASCII//TRANSLIT")
 
-    base$sp <- tolower(base$sp)
+    base$sp    <- tolower(base$sp)
     base$buque <- as.character(base$buque)
     base$fecha <- as.character(base$fecha)
-    base$lon <- -abs(base$lon)
-    base$lat <- -abs(base$lat)
+    base$lon   <- -abs(base$lon)
+    base$lat   <- -abs(base$lat)
   }
 
   # unlink(file)
@@ -86,7 +85,6 @@ renderBiometric <- function(cin =  "inputs",
     file.name <- file.path(path = cout, file.name)
     write.csv(base, file = file.name, row.names = F)
   }
-
 
   return(base)
 }
