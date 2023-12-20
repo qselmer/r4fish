@@ -13,6 +13,7 @@
 #' @examples
 curve.sel <- function(sp = NA,
                       stock = NA,
+                      marks = NA,
                       par = c(NA, NA),
                       method = "log3",
                       add.plot = T,
@@ -20,12 +21,12 @@ curve.sel <- function(sp = NA,
 
   require(ggplot2)
   #---
-  marks <- r4fish:::.getMarks(sp = sp, stock = stock)
+  if(is.na(marks)){marks <- r4fish:::.getMarks(sp = sp, stock = stock)}
   sp <- r4fish:::.getSp(sp = sp, stock = stock)
 
   if(all(is.na(par))){
-    if(method == "log3"){par = c(sp$log3.par1, sp$log3.par2)}
-    if(method == "log19"){par = c(sp$log19.par1, sp$log19.par2)}
+    if(method == "log3"){par = c(sp$selectivity3Par1, sp$selectivity3Par2)}
+    if(method == "log19"){par = c(sp$selectivity19Par1, sp$selectivity19Par1)}
   }
 
   par1 = par[1]; par2 = par[2]
