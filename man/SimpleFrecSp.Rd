@@ -4,7 +4,7 @@
 \alias{SimpleFrecSp}
 \title{Plot: Estructura de tallas para "anchoveta "spTarget" lances}
 \usage{
-SimpleFrecSp(data = tmp, sp = "anchoveta", stock = "nc", save = T)
+SimpleFrecSp(data = x, sp = "anchoveta", stock = "nc", save = T)
 }
 \arguments{
 \item{data}{datos del crucero en formato MF}

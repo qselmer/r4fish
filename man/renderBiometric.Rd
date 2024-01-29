@@ -9,7 +9,8 @@ renderBiometric(
   cout = ".",
   file = "data.xlsx",
   encoding = "latin",
-  save = T
+  save = T,
+  ...
 )
 }
 \arguments{
@@ -19,7 +20,12 @@ renderBiometric(
 
 \item{file}{vector de caracteres que contienen el nombre del archivo}
 
+\item{encoding}{vector de caracteres para tipo de codificacion}
+
 \item{save}{logico; ¿Se deben guardar el archivo?}
+}
+\value{
+base de datos biométrico
 }
 \description{
 Crea, unifica archivo biometrico
