@@ -29,7 +29,7 @@ read_freq_F1 <- function(file){
   frec[is.na(frec)] <- 0
   colnames(frec) <- time
   rownames(frec) <- marks
-  class(frec)  <- c("matrixfreq", class(frec))
+  class(frec)  <- c("matrixFreq", class(frec))
   # print(class(frec))
   return(frec)
 }
@@ -51,9 +51,9 @@ read_freq_F1 <- function(file){
 #'
 #' @return
 #' @export
-#'@method plot matrixfreq
+#'@method plot matrixFreq
 #' @examples
-plot.matrixfreq <- function(x,
+plot.matrixFreq <- function(x,
                             relative = T,
                             clean = T,
                             ylim = c(0, 20),
