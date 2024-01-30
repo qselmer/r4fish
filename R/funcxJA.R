@@ -51,7 +51,7 @@ read_freq_F1 <- function(file){
 #'
 #' @return
 #' @export
-#'
+#' @rdname plot
 #' @examples
 plot.frequency_matrix <- function(x,
                                   relative = T,
@@ -63,7 +63,7 @@ plot.frequency_matrix <- function(x,
                                   juvCol = "red",
                                   textx = "Longitud total (cm)",
                                   type = "barplot" #barplot
-){
+                                  ){
   require(r4fish)
 
   frec <- x

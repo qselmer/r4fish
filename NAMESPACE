@@ -1,1 +1,4 @@
 exportPattern("^[[:alpha:]]+")
+exportClasses(frequency_matrix)
+export(read_freq_F1)
+export(plot.frequency_matrix)
