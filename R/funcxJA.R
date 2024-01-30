@@ -1,7 +1,3 @@
-#' @export
-plot <- function(x, ...) {
-  UseMethod("plot")
-}
 # -------------------------------------------------------------------------
 #' Title
 #'
@@ -33,8 +29,8 @@ read_freq_F1 <- function(file){
   frec[is.na(frec)] <- 0
   colnames(frec) <- time
   rownames(frec) <- marks
-  class(frec) <- "frequency_matrix"
-  print(class(frec))
+  class(frec)  <- c("simplefrec", class(frec))
+  # print(class(frec))
   return(frec)
 }
 
@@ -55,7 +51,7 @@ read_freq_F1 <- function(file){
 #'
 #' @return
 #' @export
-#' @rdname plot
+#'@method plot frequency_matrix
 #' @examples
 plot.frequency_matrix <- function(x,
                                   relative = T,
