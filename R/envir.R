@@ -17,7 +17,10 @@ r4fishStartupMessage <- function()
   msg <- c(paste0(
     "🆁4🅵🅸🆂🅷 🌊🦈 version ",
 packageVersion("r4fish")),
-"\nType 'citation(\"r4fish\")' for citing this R package in publications.")
+"\nType 'citation(\"r4fish\")' for citing this R package in publications.",
+"\nType 'citation(\"r4fish\")' for citing this R package in publications.",
+"\nLAssessment for Marine Resources Toolkit",
+"\nqselmer@gmail.com")
   return(msg)
 }
 
