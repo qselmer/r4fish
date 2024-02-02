@@ -1,0 +1,18 @@
+useDynLib(r4fish)
+# useDynLib(r4fish, .registration = TRUE)
+
+# Export all names
+# exportPattern(".")
+
+# export(.r4fish)
+export(r4fish.options)
+
+importFrom(graphics,plot)
+importFrom(graphics,barplot)
+
+exportPattern("^[[:alpha:]]+")
+exportClasses(matrixFreq)
+export(read_freq_F1)
+export(plot.matrixFreq)
+
+S3method(plot,matrixFreq)
