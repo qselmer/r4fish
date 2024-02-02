@@ -15,5 +15,5 @@ document()
 ##
 roxygenise()
 build_readme()
-build_manual()
-check()
+build_manual(path = ".")
+check(manual = TRUE, cran = T)
