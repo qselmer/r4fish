@@ -5,11 +5,8 @@ require(roxygen2)
 session_info()
 
 getwd()
-
-check()
-document()
 build()
-
+document()
 # install(reload = T, force = T)
 # remotes::install_github("qselmer/r4fish")
 # load("data/species2.RData")
@@ -18,3 +15,5 @@ build()
 ##
 roxygenise()
 build_readme()
+build_manual()
+check()

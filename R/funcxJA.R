@@ -1,25 +1,10 @@
-# -------------------------------------------------------------------------
-#' Title
-#'
-#' @return
-#' @export
-#'
-#' @examples
 script_wd <- function(){
   dir <- dirname(rstudioapi::getSourceEditorContext()$path)
   setwd(dir)
   getwd()
 }
 
-# -------------------------------------------------------------------------
-#' Title
-#'
-#' @param file
-#'
-#' @return
-#' @export frequency_matrix
-#'
-#' @examples
+
 read_freq_F1 <- function(file){
   require(readxl)
   data <- read_excel(path = file, sheet = 1, skip = 3)
@@ -35,24 +20,7 @@ read_freq_F1 <- function(file){
 }
 
 
-# function n°1:-------------------------------------------------------------------------
-#' Title
-#'
-#' @param x
-#' @param relative
-#' @param clean
-#' @param ylim
-#' @param yinter
-#' @param juvMarks
-#' @param plotCol
-#' @param juvCol
-#' @param textx
-#' @param type
-#'
-#' @return
-#' @export
-#'@method plot matrixFreq
-#' @examples
+
 plot.matrixFreq <- function(x,
                             relative = T,
                             clean = T,
